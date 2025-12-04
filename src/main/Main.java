@@ -1,0 +1,22 @@
+package main;
+
+import year2026.day1.Day1;
+
+import java.lang.reflect.InvocationTargetException;
+
+public class Main {
+
+    static int YEAR = 2026;
+    static int DAY = 4;
+
+    public static void main(String[] args) throws NoSuchMethodException, ClassNotFoundException, InvocationTargetException, InstantiationException, IllegalAccessException {
+        String className = "year%d.day%d.Day%d".formatted(YEAR, DAY, DAY);
+
+        Class<?> dayClass = Class.forName(className);
+        Object dayInstance = dayClass.getDeclaredConstructor().newInstance();
+
+        dayClass.getMethod("part1").invoke(dayInstance);
+        dayClass.getMethod("part2").invoke(dayInstance);
+    }
+
+}
