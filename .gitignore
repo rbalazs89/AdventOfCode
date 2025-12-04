@@ -1,29 +1,25 @@
 ### IntelliJ IDEA ###
+.idea/
+*.iml
+*.iws
+
+# IntelliJ workspace files
+*.xml
+!pom.xml
+
+# Build output
 out/
+target/
+build/
+
+# Do NOT ignore "out" folders inside source dirs
 !**/src/main/**/out/
 !**/src/test/**/out/
 
-### Eclipse ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
-bin/
-!**/src/main/**/bin/
-!**/src/test/**/bin/
+### Java ###
+*.class
+*.log
 
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-
-### VS Code ###
-.vscode/
-
-### Mac OS ###
-.DS_Store
+### Advent of Code input files ###
+# Ignore any file starting with "input2.txt" input1 can stay:
+input2.txt
