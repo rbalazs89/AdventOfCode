@@ -1,7 +1,5 @@
 package main;
 
-import year2026.day1.Day1;
-
 import java.lang.reflect.InvocationTargetException;
 
 public class Main {

@@ -1,4 +1,4 @@
-package year2026.day3;
+package year2025.day3;
 
 import main.ReadLines;
 

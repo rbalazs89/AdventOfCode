@@ -1,4 +1,4 @@
-package year2026.day1;
+package year2025.day1;
 import main.ReadLines;
 
 import java.util.ArrayList;

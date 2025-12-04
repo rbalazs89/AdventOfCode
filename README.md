@@ -1,10 +1,10 @@
-# advent-2023
-This repository contains my solutions for the advent of code 2023 puzzles.
+# advent of code
+This repository contains my solutions for the advent of code puzzles.
 
 | Days   | Part 1                  | Part 2                 |
 | ------ | ----------------------- | ----------------------- |
-| Day 1  | ![#00ff00](https://via.placeholder.com/15/00ff00/000000?text=+) Done                    | ![#00ff00](https://via.placeholder.com/15/00ff00/000000?text=+) Done                     |
-| Day 2  | ![#00ff00](https://via.placeholder.com/15/00ff00/000000?text=+) Done                    | ![#00ff00](https://via.placeholder.com/15/00ff00/000000?text=+) Done                     |
-| Day 3  | ![#00ff00](https://via.placeholder.com/15/00ff00/000000?text=+) Done                    | ![#00ff00](https://via.placeholder.com/15/00ff00/000000?text=+) Done                      |
-| Day 4  | ![#00ff00](https://via.placeholder.com/15/00ff00/000000?text=+) Done                    | ![#00ff00](https://via.placeholder.com/15/00ff00/000000?text=+) Done                      |
+| Day 1  | ![Done](https://img.shields.io/badge/Done-brightgreen)                     | ![Done](https://img.shields.io/badge/Done-brightgreen)  Done                     |
+| Day 2  | ![Done](https://img.shields.io/badge/Done-brightgreen)                     | ![Done](https://img.shields.io/badge/Done-brightgreen)  Done                     |
+| Day 3  | ![Done](https://img.shields.io/badge/Done-brightgreen)                     | ![Done](https://img.shields.io/badge/Done-brightgreen)  Done                      |
+| Day 4  | ![Done](https://img.shields.io/badge/Done-brightgreen)                     | ![Done](https://img.shields.io/badge/Done-brightgreen)  Done                      |
 | Day 5  | TBD                    | TBD       |
