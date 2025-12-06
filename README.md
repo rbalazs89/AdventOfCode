@@ -1,5 +1,5 @@
 # advent of code
-This repository contains my solutions for the advent of code puzzles.
+This repository contains my solutions to the advent of code puzzles.
 
 # Advent of Code 2025
 
@@ -9,4 +9,5 @@ This repository contains my solutions for the advent of code puzzles.
 | Day 2  | ![Done](https://img.shields.io/badge/Done-brightgreen) | ![Done](https://img.shields.io/badge/Done-brightgreen) |
 | Day 3  | ![Done](https://img.shields.io/badge/Done-brightgreen) | ![Done](https://img.shields.io/badge/Done-brightgreen) |
 | Day 4  | ![Done](https://img.shields.io/badge/Done-brightgreen) | ![Done](https://img.shields.io/badge/Done-brightgreen) |
-| Day 5  | TBD                                              | TBD                                              |
+| Day 5  | ![Done](https://img.shields.io/badge/Done-brightgreen) | ![Done](https://img.shields.io/badge/Done-brightgreen) |
+| Day 6  | TBD                                              | TBD                                              |
