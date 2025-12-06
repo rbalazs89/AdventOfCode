@@ -10,4 +10,5 @@ This repository contains my solutions to the advent of code puzzles.
 | Day 3  | ![Done](https://img.shields.io/badge/Done-brightgreen) | ![Done](https://img.shields.io/badge/Done-brightgreen) |
 | Day 4  | ![Done](https://img.shields.io/badge/Done-brightgreen) | ![Done](https://img.shields.io/badge/Done-brightgreen) |
 | Day 5  | ![Done](https://img.shields.io/badge/Done-brightgreen) | ![Done](https://img.shields.io/badge/Done-brightgreen) |
-| Day 6  | TBD                                              | TBD                                              |
+| Day 6  | ![Done](https://img.shields.io/badge/Done-brightgreen) | ![Done](https://img.shields.io/badge/Done-brightgreen) |
+| Day 7  | TBD                                              | TBD                                              |
