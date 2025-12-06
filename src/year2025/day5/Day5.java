@@ -63,7 +63,7 @@ public class Day5 {
         System.out.println("part 1 result: " + result);
     }
 
-    public void part2didntwork() {
+    public void part2() {
         readData();
         processData();
 
@@ -98,7 +98,7 @@ public class Day5 {
         System.out.println("part 2 result: " + result);
     }
 
-    public void part2(){
+    public void part2didntwork(){
         readData();
         processData();
 
