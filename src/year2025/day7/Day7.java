@@ -38,8 +38,15 @@ public class Day7 {
         makeBeamPart2();
         processColliders();
         part2Result();
-        drawGrid2();
+        //drawGrid2();
         //System.out.println(grid2[8][4].noMoreCollision + " " + grid2[8][4].incomingBeamN);
+        long result = 0;
+        for (int i = 0; i < maxX; i++) {
+            if(grid2[maxY - 1][i].type == '|'){
+                result += grid2[maxY - 1][i].overlapCounter;
+            }
+        }
+        System.out.println(result);
 
     }
 
