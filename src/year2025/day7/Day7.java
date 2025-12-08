@@ -36,10 +36,8 @@ public class Day7 {
     public void part2(){
         makeGridPart2();
         makeBeamPart2();
-        processColliders();
-        part2Result();
         //drawGrid2();
-        //System.out.println(grid2[8][4].noMoreCollision + " " + grid2[8][4].incomingBeamN);
+
         long result = 0;
         for (int i = 0; i < maxX; i++) {
             if(grid2[maxY - 1][i].type == '|'){
@@ -151,53 +149,6 @@ public class Day7 {
             System.out.println();
         }
         System.out.println();
-    }
-
-    public void processColliders(){
-        for (int i = 0; i < maxY; i++) {
-            for (int j = 0; j < maxX; j++) {
-                if(grid2[i][j].type == '^'){
-                    processOneCollider(i, j);
-                }
-            }
-        }
-    }
-
-    public void processOneCollider(int y, int x){
-        GridElement e = grid2[y][x];
-
-        int counterLeft = y;
-        int counterRight = y;
-        for (int i = y; i < maxY; i++) {
-            if(grid2[i][x + 1].type != '^'){
-                counterRight ++;
-            }
-            if(grid2[i][x - 1].type != '^'){
-                counterLeft ++;
-            }
-        }
-        if(counterLeft == maxY){
-            e.noMoreCollision ++;
-        }
-
-        if(counterRight == maxY){
-            e.noMoreCollision ++;
-        }
-        e.incomingBeamN = grid2[y - 1][x].overlapCounter;
-        grid2[y][x] = e;
-    }
-
-    public void part2Result(){
-        long result = 0;
-        for (int i = 0; i < maxY; i++) {
-            for (int j = 0; j < maxX; j++) {
-                GridElement e = grid2[i][j];
-                if(e.type == '^'){
-                    result = result + e.incomingBeamN * e.noMoreCollision;
-                }
-            }
-        }
-        System.out.println("part 2 result: " + result);
     }
 
     public void drawGrid2(){
