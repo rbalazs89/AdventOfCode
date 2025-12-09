@@ -5,7 +5,7 @@ import java.lang.reflect.InvocationTargetException;
 public class Main {
 
     static int YEAR = 2025;
-    static int DAY = 8;
+    static int DAY = 9;
 
     public static void main(String[] args) throws NoSuchMethodException, ClassNotFoundException, InvocationTargetException, InstantiationException, IllegalAccessException {
         String className = "year%d.day%d.Day%d".formatted(YEAR, DAY, DAY);

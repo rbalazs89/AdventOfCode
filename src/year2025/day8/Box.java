@@ -6,14 +6,14 @@ import java.util.Set;
 
 class Box {
 
-    int x;
-    int y;
-    int z;
+    long x;
+    long y;
+    long z;
 
     long squaredDistance(Box other) {
-        int dx = x - other.x;
-        int dy = y - other.y;
-        int dz = z - other.z;
+        long dx = x - other.x;
+        long dy = y - other.y;
+        long dz = z - other.z;
         return (long)(dx*dx + dy*dy + dz*dz);
     }
 
