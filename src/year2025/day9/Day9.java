@@ -47,12 +47,12 @@ public class Day9 {
     public void part2() {
         /** idea for solution:
          * the polygon seems suspiciously handcrafted and special in many ways, see attached png
-         * There are two big edges in the middle caused by two corner points.
+         * There are two big edges in the middle caused by two special corner points.
          * Other than that the polygon is very similar to a circle.
          *
          * Idea for solution:
          * From the picture its obvious at first glance that one of the edges for the highest aread rectangle
-         * is one of those edges. The other one is somewhere on the other side of the rectangle.
+         * is one of those special corner points extending to the middle. The other one is somewhere on the other side of the rectangle.
          */
         readData();
         processData();
