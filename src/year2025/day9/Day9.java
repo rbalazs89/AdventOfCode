@@ -2,12 +2,11 @@ package year2025.day9;
 
 import main.ReadLines;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
 
 public class Day9 {
-    // 3147366750 part 2 too high
-    // 1082535750 part 2 too low
 
     List<String> fileLines;
     int inputFileIndex = 2;
@@ -41,7 +40,7 @@ public class Day9 {
                 result = Math.max((x + 1L) * (y + 1L), result);
             }
         }
-        System.out.println(result);
+        System.out.println("part 1: " + result);
     }
 
     public void part2() {
@@ -50,16 +49,185 @@ public class Day9 {
          * There are two big edges in the middle caused by two special corner points.
          * Other than that the polygon is very similar to a circle.
          *
-         * Idea for solution:
          * From the picture its obvious at first glance that one of the edges for the highest aread rectangle
          * is one of those special corner points extending to the middle. The other one is somewhere on the other side of the rectangle.
+         *
+         * number 0 point starts at 3:00 and goes clockwise, so the 2 unique points are expected to be about i ~ 250;
          */
         readData();
         processData();
 
         PolygonViewer.showWindow(points);
 
-        System.out.println("i dont know how to do this part 2 :(");
+        // have some idea about min max coordinates:
+        int minX = Integer.MAX_VALUE;
+        int minY = Integer.MAX_VALUE;
+        int maxX = Integer.MIN_VALUE;
+        int maxY = Integer.MIN_VALUE;
+        for (int i = 0; i < points[0].length; i++) {
+            minX = Math.min(points[0][i], minX);
+            minY = Math.min(points[1][i], minY);
+            maxX = Integer.max(points[0][i], maxX);
+            maxY = Integer.max(points[1][i], maxY);
+        }
 
+        //System.out.println("minX: " + minX + " minY: " + minY + " maxX: " + maxX + " maxY: "+ maxY);
+
+        ArrayList<int[]> unique = new ArrayList<>();
+        for (int i = 0; i < points[0].length - 1; i++) {
+            int vibeDistance = 10 * Math.max(Math.abs(points[0][0] - points[0][1]), Math.abs(points[1][0] - points[1][1]));
+            int currentDistance = Math.max(Math.abs(points[0][i] - points[0][i + 1]), Math.abs(points[1][i] - points[1][i + 1]));
+            if(vibeDistance <  currentDistance){
+                int[] firstUnique = {points[0][i + 1], points[1][i + 1]};
+                System.out.println("firstUnique: " + (i + 1)); // i = 248
+                System.out.println("secondUnique: " + (i + 2)); // i = 249
+                unique.add(firstUnique);
+                break;
+            }
+        }
+
+        /** Based on visual confirmation:
+         * scenario one:
+         * - corner point 1 is i = 248
+         * - corner point 2 is around i ~ 225
+         *
+         * scenario two:
+         * - corner point is i = 249
+         * - corner point 2 is around i ~ 275
+         */
+
+        // SCENARIO 1:
+        int tolerance = 35;
+        int unique1 = 248;
+        int index1 = 225;
+        int unique2 = 249;
+        int index2 = 275;
+        int area = 0;
+
+        int maxI = -1;
+        int currentI = -1;
+
+        ArrayList<int[]> rectangle = new ArrayList<>();
+        boolean checkOnlyOneForTest = false;
+        int checkThis = 218;
+
+        //SCENARIO 1:
+        outerLoop:
+        for (int i = index1 - tolerance; i < index1 + 2 * tolerance; i++) {
+            boolean intersecting = false;
+            if(i >= unique1){
+                continue ;
+            }
+            if(checkOnlyOneForTest){
+                i = checkThis;
+            }
+            // rectangle:
+            int[] topRight = {points[0][unique1], points[1][unique1]};
+            int[] topLeft = {points[0][i], points[1][unique1]};
+            int[] bottomLeft = {points[0][i], points[1][i]};
+            int[] bottomRight = {points[0][unique1], points[1][i]};
+            currentI = i;
+            rectangle.add(topRight);
+            rectangle.add(bottomRight);
+            rectangle.add(bottomLeft);
+            rectangle.add(topLeft);
+
+            // check intersections:
+            int x1, y1, x2, y2, a1, b1, a2, b2;
+            middleloop:
+            for (int j = 0; j < rectangle.size() - 1; j++) {
+                int index = j + 1;
+                if(j == rectangle.size() - 1){
+                    index = 0;
+                }
+                x1 = rectangle.get(j)[0];
+                y1 = rectangle.get(j)[1];
+                x2 = rectangle.get(index)[0];
+                y2 = rectangle.get(index)[1];
+
+                for (int k = 0; k < unique1; k++) {
+                    a1 = points[0][k];
+                    b1 = points[1][k];
+                    a2 = points[0][k + 1];
+                    b2 = points[1][k + 1];
+
+                    if(doLinesIntersect(x1, y1, x2, y2, a1, b1, a2, b2)){
+                        intersecting = true;
+                        break middleloop;
+                    }
+                }
+            }
+
+            if(!intersecting) {
+                int side1 = Math.abs(points[0][unique1] - points[0][i]);
+                int side2 = Math.abs(points[1][i] - points[1][unique1]);
+                int currentArea = (side1 + 1) * (side2 + 1);
+                if (currentArea > area) {
+                    area = currentArea;
+                    maxI = currentI;
+                }
+            }
+            rectangle.clear();
+        }
+        // constructing scenario 2 was not needed, good result was in scenario 1 (lower half of the polygon)
+
+        System.out.println("max I: " + maxI);
+        System.out.println("part2 result: " + area);
+    }
+
+    public boolean doLinesIntersect(int x1, int y1, int x2, int y2,
+                                     int a1, int b1, int a2, int b2) {
+
+        // normalize ranges
+        int minX1 = Math.min(x1, x2);
+        int maxX1 = Math.max(x1, x2);
+        int minY1 = Math.min(y1, y2);
+        int maxY1 = Math.max(y1, y2);
+
+        int minX2 = Math.min(a1, a2);
+        int maxX2 = Math.max(a1, a2);
+        int minY2 = Math.min(b1, b2);
+        int maxY2 = Math.max(b1, b2);
+
+        boolean pVert = (x1 == x2);
+        boolean qVert = (a1 == a2);
+
+        // vertical vs horizontal
+        if (pVert != qVert) {
+            if (pVert) {
+                int ix = x1;
+                int iy = b1; // horizontals y
+
+                boolean inside1 = (minY1 < iy && iy < maxY1); // strict inside
+                boolean inside2 = (minX2 < ix && ix < maxX2); // strict inside
+
+                return inside1 && inside2;
+            } else {
+                int ix = a1;
+                int iy = y1;
+
+                boolean inside1 = (minX1 < ix && ix < maxX1);
+                boolean inside2 = (minY2 < iy && iy < maxY2);
+
+                return inside1 && inside2;
+            }
+        }
+
+        // same orientation (vertical/vertical or horizontal/horizontal)
+        if (pVert) {
+            // must share X
+            if (x1 != a1) return false;
+
+            // check STRICT Y-range overlap (no touching)
+            return (maxY1 > minY2) && (maxY2 > minY1) &&
+                    !(maxY1 == minY2) && !(maxY2 == minY1);
+        } else {
+            // horizontal: must share Y
+            if (y1 != b1) return false;
+
+            // check STRICT X-range overlap (no touching)
+            return (maxX1 > minX2) && (maxX2 > minX1) &&
+                    !(maxX1 == minX2) && !(maxX2 == minX1);
+        }
     }
 }

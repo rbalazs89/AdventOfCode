@@ -42,12 +42,105 @@ public class PolygonViewer extends JPanel {
         g2.setColor(Color.BLUE);
         g2.drawPolygon(poly);
 
+        /*int maxI = 244;
+        int x1 = (int)(points[0][248] * scale);
+        int y1 = (int)(points[1][248] * scale);
+        int x2 = (int)(points[0][maxI] * scale);
+        int y2 = y1;
+        int x3 = (int)(points[0][maxI] * scale);
+        int y3 = (int)(points[1][maxI] * scale);
+        int x4 = x1;
+        int y4 = y3;
+        int width = x2 - x1;
+        int height = y3 - y1;
+
+        g2.setStroke(new BasicStroke(25));
+        g2.setColor(Color.BLACK);
+        g2.drawRect(x2, y2, width, height);*/
+
+        /// ///////////
+        // drawrect 1
+        /// //////////
+        int maxI = 217;
+
+        int realx1 = (points[0][248]);
+        int realy1 = (points[1][248]);
+        int realx3 = (points[0][maxI]);
+        int realy3 = (points[1][maxI]);
+
+        int realArea = (Math.abs(realx1 - realx3) + 1) * (Math.abs(realy1 - realy3) + 1);
+        //System.out.println("drawing: " + realArea);
+
+        int x1 = (int)(points[0][248] * scale);
+        int y1 = (int)(points[1][248] * scale);
+        int x3 = (int)(points[0][maxI] * scale);
+        int y3 = (int)(points[1][maxI] * scale);
+
+        // normalize
+        int left = Math.min(x1, x3);
+        int right = Math.max(x1, x3);
+        int top = Math.min(y1, y3);
+        int bottom = Math.max(y1, y3);
+
+        int width = right - left;
+        int height = bottom - top;
+
+        g2.setStroke(new BasicStroke(2));
+        g2.setColor(Color.BLACK);
+        g2.drawRect(left, top, width, height);
+
+        /// ///////////
+        // drawrect 2
+        /// //////////
+        int maxI2 = 278;
+
+        realx1 = (points[0][249]);
+        realy1 = (points[1][249]);
+        realx3 = (points[0][maxI2]);
+        realy3 = (points[1][maxI2]);
+
+        realArea = (Math.abs(realx1 - realx3) + 1) * (Math.abs(realy1 - realy3) + 1);
+        //System.out.println("drawing: " + realArea);
+
+        x1 = (int)(points[0][249] * scale);
+        y1 = (int)(points[1][249] * scale);
+        x3 = (int)(points[0][maxI2] * scale);
+        y3 = (int)(points[1][maxI2] * scale);
+
+        // normalize
+        left = Math.min(x1, x3);
+        right = Math.max(x1, x3);
+        top = Math.min(y1, y3);
+        bottom = Math.max(y1, y3);
+
+        width = right - left;
+        height = bottom - top;
+
+        g2.setStroke(new BasicStroke(2));
+        g2.setColor(Color.BLACK);
+        g2.drawRect(left, top, width, height);
+
         // Draw points
         g2.setColor(Color.BLACK);
         for (int i = 0; i < points[0].length; i++) {
+            g2.setColor(Color.BLACK);
             int sx = (int)(points[0][i] * scale);
             int sy = (int)(points[1][i] * scale);
             g2.fillOval(sx - 3, sy - 3, 6, 6);
+            // starting point, going clockwise
+            if(i < 1){
+                g2.setColor(Color.RED);
+                g2.fillOval(sx - 3, sy - 3, 10, 10);
+            }
+            // unique points
+            if(i == 248 || i == 249){
+                g2.setColor(Color.GREEN);
+                g2.fillOval(sx - 3, sy - 3, 6, 6);
+            }
+            if(i == 25 || i == 225 || i == 465 || i == 275){
+                g2.setColor(Color.BLUE);
+                g2.fillOval(sx - 3, sy - 3, 8, 8);
+            }
         }
     }
 

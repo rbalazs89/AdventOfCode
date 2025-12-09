@@ -5,7 +5,6 @@ import main.ReadLines;
 import java.util.*;
 
 public class Day8 {
-    // 1377623342 too low
 
     List<String> fileLines;
     int inputFileIndex = 2;
