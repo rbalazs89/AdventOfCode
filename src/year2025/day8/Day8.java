@@ -8,6 +8,7 @@ public class Day8 {
     // 1000 too low
     // 16000 too low
 
+
     List<String> fileLines;
     int inputFileIndex = 2;
     int boxesToConnect = 1000; // 10 for sample input, 1000 for real input
