@@ -19,6 +19,7 @@ public class Day13 {
         ReadLines reader = new ReadLines();
         fileLines = reader.readFile(inputFileIndex);
     }
+
     public void getPPL(){
         String firstName = fileLines.get(0).split(" ")[0];
         for (int i = 0; i < fileLines.size(); i++) {
