@@ -14,4 +14,4 @@ This repository contains my solutions to the advent of code puzzles.
 | Day 7  | ![Done](https://img.shields.io/badge/Done-brightgreen) | ![Done](https://img.shields.io/badge/Done-brightgreen) |
 | Day 8  | ![Done](https://img.shields.io/badge/Done-brightgreen) | ![Done](https://img.shields.io/badge/Done-brightgreen) |
 | Day 9  | ![Done](https://img.shields.io/badge/Done-brightgreen) | ![Done](https://img.shields.io/badge/Done-brightgreen) |
-| Day 10 | TBD                                              | TBD                                              |
+| Day 10 | ![Done](https://img.shields.io/badge/Done-brightgreen) | ![Done](https://img.shields.io/badge/Hard-red) will need to learn additional graphs theory to solve this|

@@ -4,7 +4,6 @@ import main.ReadLines;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.IntStream;
 
 public class Day9 {
 
@@ -17,6 +16,7 @@ public class Day9 {
         ReadLines reader = new ReadLines();
         fileLines = reader.readFile(inputFileIndex);
     }
+
     public void processData(){
         points = new int[2][fileLines.size()];
         for (int i = 0; i < fileLines.size(); i++) {
@@ -47,11 +47,9 @@ public class Day9 {
         /** idea for solution:
          * the polygon seems suspiciously handcrafted and special in many ways, see attached png
          * There are two big edges in the middle caused by two special corner points.
-         * Other than that the polygon is very similar to a circle.
-         *
+         * Other than that the polygon is very similar to a circle.*
          * From the picture its obvious at first glance that one of the edges for the highest aread rectangle
          * is one of those special corner points extending to the middle. The other one is somewhere on the other side of the rectangle.
-         *
          * number 0 point starts at 3:00 and goes clockwise, so the 2 unique points are expected to be about i ~ 250;
          */
         readData();
@@ -72,8 +70,6 @@ public class Day9 {
         }
 
         //System.out.println("minX: " + minX + " minY: " + minY + " maxX: " + maxX + " maxY: "+ maxY);
-
-        ArrayList<int[]> unique = new ArrayList<>();
         for (int i = 0; i < points[0].length - 1; i++) {
             int vibeDistance = 10 * Math.max(Math.abs(points[0][0] - points[0][1]), Math.abs(points[1][0] - points[1][1]));
             int currentDistance = Math.max(Math.abs(points[0][i] - points[0][i + 1]), Math.abs(points[1][i] - points[1][i + 1]));
@@ -81,7 +77,6 @@ public class Day9 {
                 int[] firstUnique = {points[0][i + 1], points[1][i + 1]};
                 System.out.println("firstUnique: " + (i + 1)); // i = 248
                 System.out.println("secondUnique: " + (i + 2)); // i = 249
-                unique.add(firstUnique);
                 break;
             }
         }
@@ -90,7 +85,6 @@ public class Day9 {
          * scenario one:
          * - corner point 1 is i = 248
          * - corner point 2 is around i ~ 225
-         *
          * scenario two:
          * - corner point is i = 249
          * - corner point 2 is around i ~ 275
@@ -100,26 +94,17 @@ public class Day9 {
         int tolerance = 35;
         int unique1 = 248;
         int index1 = 225;
-        int unique2 = 249;
-        int index2 = 275;
         int area = 0;
 
         int maxI = -1;
-        int currentI = -1;
+        int currentI;
 
         ArrayList<int[]> rectangle = new ArrayList<>();
-        boolean checkOnlyOneForTest = false;
-        int checkThis = 218;
-
         //SCENARIO 1:
-        outerLoop:
         for (int i = index1 - tolerance; i < index1 + 2 * tolerance; i++) {
             boolean intersecting = false;
             if(i >= unique1){
                 continue ;
-            }
-            if(checkOnlyOneForTest){
-                i = checkThis;
             }
             // rectangle:
             int[] topRight = {points[0][unique1], points[1][unique1]};
