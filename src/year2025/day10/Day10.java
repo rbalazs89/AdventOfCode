@@ -4,17 +4,21 @@ import main.ReadLines;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 public class Day10 {
+    // too low 2551
+    // too low 10793
     List<String> fileLines;
-    int inputFileIndex = 1;
+    int inputFileIndex = 2;
     ArrayList<Machine> machines = new ArrayList<>();
+    private static final int MAX_J = 250;
 
     //optimization variables:
     int buttonsNumber;
     int[] tempSolution;
-    int tempSolutionSum = Integer.MAX_VALUE;
+    long tempSolutionSum = Long.MAX_VALUE;
     int finalSolution = 0;
     int lightSize = 0;
 
@@ -92,7 +96,6 @@ public class Day10 {
         }
         System.out.println();
         System.out.println(finalSolution);
-
     }
 
     public void generateCombinations(Machine m, int nthButtonPressed){
@@ -232,7 +235,7 @@ public class Day10 {
         }
     }
 
-    private boolean isOvershot(Machine m) {
+    public boolean isOvershot(Machine m) {
         for (int i = 0; i < m.currentLights.length; i++) {
             if (m.currentLights[i] > m.joltage[i]) {
                 return true;
