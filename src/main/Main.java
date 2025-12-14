@@ -16,5 +16,4 @@ public class Main {
         dayClass.getMethod("part1").invoke(dayInstance);
         dayClass.getMethod("part2").invoke(dayInstance);
     }
-
 }

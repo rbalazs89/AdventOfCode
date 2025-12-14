@@ -14,6 +14,6 @@ This repository contains my solutions to the advent of code puzzles.
 | Day 7  | ![Done](https://img.shields.io/badge/Done-brightgreen) | ![Done](https://img.shields.io/badge/Done-brightgreen)                                                                            |
 | Day 8  | ![Done](https://img.shields.io/badge/Done-brightgreen) | ![Done](https://img.shields.io/badge/Done-brightgreen)                                                                            |
 | Day 9  | ![Done](https://img.shields.io/badge/Done-brightgreen) | ![Done](https://img.shields.io/badge/Done-brightgreen)                                                                            |
-| Day 10 | ![Done](https://img.shields.io/badge/Done-brightgreen) | ![Done](https://img.shields.io/badge/Hard-red) will need to learn additional graphs theory / linear equation system to solve this |
-| Day 11 | ![Done](https://img.shields.io/badge/Done-brightgreen) | ![Done](https://img.shields.io/badge/Done-yellow) Solution might not be universal, but specific to my input                       |
-| Day 12 | TBD                                                    | TBD                                                                                                                               |
+| Day 10 | ![Done](https://img.shields.io/badge/Done-brightgreen) | ![Done](https://img.shields.io/badge/Done-yellow) few minutes runtime |
+| Day 11 | ![Done](https://img.shields.io/badge/Done-brightgreen) | ![Done](https://img.shields.io/badge/Done-brightgreen)                        |
+| Day 12 | ![Done](https://img.shields.io/badge/Done-brightgreen) | ![Done](https://img.shields.io/badge/Done-brightgreen)                                                                            |

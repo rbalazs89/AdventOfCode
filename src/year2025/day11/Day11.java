@@ -79,12 +79,23 @@ public class Day11 {
      */
 
     public void part2(){
+        long scenario1 = 0;
         long result1 = seeking("svr", "fft");
         resetGraph();
         long result2 = seeking("fft", "dac");
         resetGraph();
         long result3 = seeking("dac", "out");
-        System.out.println("part 2 result: " + result1 * result2 * result3);
+
+        scenario1 = result1 * result2 * result3;
+
+        resetGraph();
+        result1 = seeking("svr", "dac");
+        resetGraph();
+        result2 = seeking("dac", "fft");
+        resetGraph();
+        result3 = seeking("fft", "out");
+        long scenario2 = result1 * result2 * result3;
+        System.out.println("part 2 result: " + Math.max(scenario2, scenario1));
     }
 
     public long seeking(String startName, String endName){
@@ -93,7 +104,7 @@ public class Day11 {
 
         for (Device d : devices) {
             d.paths = 0L;
-            d.visited = 0;           // number of incoming edges we've seen from reachable predecessors
+            d.visited = 0;           // number of incoming edges seen from reachable predecessors
             d.delay = 0;             // how many levels we have been waiting
         }
 
@@ -120,7 +131,7 @@ public class Day11 {
 
                     if(next.visited == next.in.size()){
                         nextLevel.add(next);
-                        delayed.remove(next);
+                        delayed.remove(next); // remove from delayed if all inputs arrive in the meantime
                     } else {
                         if (!delayed.contains(next) && !nextLevel.contains(next) && next != start) {
                             delayed.add(next);
