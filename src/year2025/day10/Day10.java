@@ -176,10 +176,11 @@ public class Day10 {
 
             // go until there are solutions
             while(!solutionsQueue.isEmpty()){
-                for (int i = 0; i < solutionsQueue.size(); i++) {
+                fillQueue();
+                /*for (int i = 0; i < solutionsQueue.size(); i++) {
                     temporaryQueue.add(solutionsQueue.get(i));
                 }
-                solutionsQueue.clear();
+                solutionsQueue.clear();*/
 
                 for (int i = 0; i < temporaryQueue.size(); i++) {
                     Machine m = temporaryQueue.get(i);
@@ -195,6 +196,22 @@ public class Day10 {
         }
         System.out.println(part2cumulative);
 
+    }
+
+    public void fillQueue(){
+        Set<String> set = new HashSet<>();
+        for (int i = 0; i < solutionsQueue.size(); i++) {
+            Machine m = solutionsQueue.get(i);
+            StringBuilder sb = new StringBuilder();
+            for (int[] row : m.storedButtonPresses) {
+                sb.append(Arrays.toString(row)).append(";");
+            }
+            String currentString = sb.toString();
+            if(set.add(currentString)){
+                temporaryQueue.add(solutionsQueue.get(i));
+            }
+        }
+        solutionsQueue.clear();
     }
 
     public void getValidCombinations(Machine m, int nthButtonPressed){
@@ -324,7 +341,7 @@ public class Day10 {
         for (int i = 0; i < ma.lights.length; i++) {
             ma.lights[i] = ma.remainingJoltage[i] % 2;
         }
-        if(ma.index != 48 && ma.index!= 23){ // these two machines dont find a solution with the method incl below, i cant figure out why
+        /*if(ma.index != 48 && ma.index!= 23){ // these two machines dont find a solution with the method incl below, i cant figure out why
             while(true){
                 for (int i = 0; i < ma.lights.length; i++) {
                     ma.lights[i] = ma.remainingJoltage[i] % 2;
@@ -342,7 +359,7 @@ public class Day10 {
                     break;
                 }
             }
-        }
+        }*/
     }
 
     public int getBestFromSolvedList(int q){
