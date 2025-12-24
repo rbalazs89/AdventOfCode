@@ -1,6 +1,5 @@
 package year2025.day11;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 class Device {
@@ -9,6 +8,5 @@ class Device {
     int visited = 0;
     ArrayList<Device> in = new ArrayList<>();
     ArrayList<Device> out = new ArrayList<>();
-    boolean removeThis = false;
     int delay = 0;
 }
