@@ -13,10 +13,11 @@ public class Day15 {
     ArrayList<Ingredient> ingredients = new ArrayList<>();
     int finalScore = 0;
 
+    private final ReadLines reader = new ReadLines(2015, 15);
+    int inputNumber = 2; // use 1 for mock data, 2 for real data
     public void readData(){
         // READ INPUT
-        ReadLines reader = new ReadLines();
-        fileLines = reader.readFile(inputFileIndex);
+        fileLines = reader.readFile(inputNumber);
     }
 
     public void processData(){

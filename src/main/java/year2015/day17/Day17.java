@@ -14,10 +14,11 @@ public class Day17 {
     int combinations = 0;
     int minContainers = 3;
 
+    private final ReadLines reader = new ReadLines(2015, 17);
+    int inputNumber = 2; // use 1 for mock data, 2 for real data
     public void readData(){
         // READ INPUT
-        ReadLines reader = new ReadLines();
-        fileLines = reader.readFile(2);
+        fileLines = reader.readFile(inputNumber);
     }
 
     public void processFile(){

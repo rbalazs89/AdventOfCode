@@ -2,7 +2,6 @@ package year2015.day16;
 
 import main.ReadLines;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class Day16 {
@@ -23,10 +22,11 @@ public class Day16 {
     String[] enums;
     List<String> fileLines;
 
+    private final ReadLines reader = new ReadLines(2015, 16);
+    int inputNumber = 2; // use 1 for mock data, 2 for real data
     public void readData(){
         // READ INPUT
-        ReadLines reader = new ReadLines();
-        fileLines = reader.readFile(2);
+        fileLines = reader.readFile(inputNumber);
     }
 
     public void processData(){

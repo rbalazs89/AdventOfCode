@@ -17,10 +17,11 @@ public class Day18 {
      A light which is off turns on if exactly 3 neighbors are on, and stays off otherwise.
      */
 
+    private final ReadLines reader = new ReadLines(2015, 18);
+    int inputNumber = 2; // use 1 for mock data, 2 for real data
     public void readData(){
         // READ INPUT
-        ReadLines reader = new ReadLines();
-        fileLines = reader.readFile(inputFileIndex);
+        fileLines = reader.readFile(inputNumber);
     }
 
     public void processData(){
