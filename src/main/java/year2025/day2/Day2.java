@@ -5,18 +5,18 @@ import main.ReadLines;
 import java.util.List;
 
 public class Day2 {
-    List<String> fileLines;
-    Long[] IDNumbers;
+    private List<String> fileLines;
+    private Long[] IDNumbers;
 
-    public void readData(){
+    private final ReadLines reader = new ReadLines(2025, 2, 2);
+    private void readData(){
         // READ INPUT
-        ReadLines reader = new ReadLines();
-        fileLines = reader.readFile(2);
+        fileLines = reader.readFile();
     }
 
-    public void getNumbers(){
+    private void getNumbers(){
         readData();
-        String[] IDRanges = fileLines.get(0).split(","); // txt is one line only
+        String[] IDRanges = fileLines.getFirst().split(","); // txt is one line only
         IDNumbers = new Long[IDRanges.length * 2];
         for (int i = 0; i < IDRanges.length; i++) {
             String[] temp = IDRanges[i].split("-");
@@ -59,7 +59,7 @@ public class Day2 {
         System.out.println(result);
     }
 
-    public boolean isRepeatedTwice(long n) {
+    private boolean isRepeatedTwice(long n) {
         int totalDigits = 0;
         long temp = n;
         while (temp > 0) {
@@ -84,7 +84,7 @@ public class Day2 {
         return firstHalf == secondHalf;
     }
 
-    public boolean isRepeatedAtLeastTwice(long input){
+    private boolean isRepeatedAtLeastTwice(long input){
         //TODO numbers only version, no string
         String numberAsString = Long.toString(input);
         int totalLength = numberAsString.length();
@@ -110,11 +110,5 @@ public class Day2 {
         }
 
         return false;
-    }
-
-    private static long pow10(int exp) {
-        long result = 1;
-        for (int i = 0; i < exp; i++) result *= 10;
-        return result;
     }
 }

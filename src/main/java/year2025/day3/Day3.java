@@ -8,10 +8,11 @@ public class Day3 {
 
     List<String> fileLines;
 
-    public void readData(){
+    private final ReadLines reader = new ReadLines(2025, 3);
+    int inputNumber = 2; // use 1 for mock data, 2 for real data
+    private void readData(){
         // READ INPUT
-        ReadLines reader = new ReadLines();
-        fileLines = reader.readFile(2);
+        fileLines = reader.readFile(inputNumber);
     }
 
     public void part1(){
@@ -23,7 +24,7 @@ public class Day3 {
                 for (int k = j + 1; k < fileLines.get(i).length(); k++) {
 
                     int current = Integer.parseInt(
-                            fileLines.get(i).substring(j, j + 1) +
+                            fileLines.get(i).charAt(j) +
                                     fileLines.get(i).substring(k, k + 1));
                     if(currentMax < current){
                         currentMax = current;

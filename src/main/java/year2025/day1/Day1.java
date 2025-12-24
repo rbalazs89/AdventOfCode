@@ -8,10 +8,11 @@ public class Day1 {
 
     List<String> fileLines;
 
-    public void readData(){
+    private final ReadLines reader = new ReadLines(2025, 1);
+    int inputNumber = 2; // use 1 for mock data, 2 for real data
+    private void readData(){
         // READ INPUT
-        ReadLines reader = new ReadLines();
-        fileLines = reader.readFile(2);
+        fileLines = reader.readFile(inputNumber);
     }
 
     public void part1(){
