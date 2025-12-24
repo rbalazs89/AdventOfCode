@@ -1,25 +1,23 @@
 package year2015.day7;
 
 import main.ReadLines;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 public class Day7 {
-    List<String> fileLines;
-    List<Instruction> instructions = new ArrayList<>();
-    List<Wire> wires = new ArrayList<>();
-    int part1Result = 0;
+    private final ReadLines reader = new ReadLines(2015, 7, 2);
+    private List<String> fileLines;
+    private final List<Instruction> instructions = new ArrayList<>();
+    private final List<Wire> wires = new ArrayList<>();
+    private int part1Result = 0;
 
-    public void readData(){
-        // READ INPUT
-        ReadLines reader = new ReadLines();
-        fileLines = reader.readFile(2);
+    private void readData(){
+        fileLines = reader.readFile();
     }
 
-    public void processInput() {
+    private void processInput() {
         Set<String> detectIfExists = new HashSet<>();
 
         for (int i = 0; i < fileLines.size(); i++) {
@@ -200,14 +198,13 @@ public class Day7 {
         }
     }
 
-    public Wire findWire(String wireName){
+    private Wire findWire(String wireName){
         for (int i = 0; i < wires.size(); i++) {
             if(wireName.equals(wires.get(i).name)){
                 return wires.get(i);
             }
         }
-        System.out.println("problem");
-        return null;
+        throw new IllegalStateException("Not supposed to happen");
     }
 
     public void part1(){
@@ -225,7 +222,7 @@ public class Day7 {
 
     }
 
-    void processOneInstruction(Instruction instruction){
+    private void processOneInstruction(Instruction instruction){
         if(instruction.done){
             return;
         }

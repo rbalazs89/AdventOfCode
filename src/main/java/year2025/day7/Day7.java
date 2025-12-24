@@ -15,13 +15,13 @@ public class Day7 {
     int maxY = 0;
     int[] start = new int[2];
     Set<String> savedPositions = new HashSet<>();
-
     GridElement[][] grid2;
 
-    public void readData(){
+    private final ReadLines reader = new ReadLines(2025, 7);
+    int inputNumber = 2; // use 1 for mock data, 2 for real data
+    private void readData(){
         // READ INPUT
-        ReadLines reader = new ReadLines();
-        fileLines = reader.readFile(2);
+        fileLines = reader.readFile(inputNumber);
     }
 
     public void part1(){
@@ -50,7 +50,7 @@ public class Day7 {
 
     public void makeStartingGrid(){
         readData();
-        maxX = fileLines.get(0).length();
+        maxX = fileLines.getFirst().length();
         maxY = fileLines.size();
 
         grid = new char[maxY][maxX];
@@ -71,7 +71,7 @@ public class Day7 {
 
     public void makeGridPart2(){
         readData();
-        maxX = fileLines.get(0).length();
+        maxX = fileLines.getFirst().length();
         maxY = fileLines.size();
 
         grid = new char[maxY][maxX];
