@@ -6,13 +6,10 @@ import java.util.List;
 
 public class Day3 {
 
-    List<String> fileLines;
-
-    private final ReadLines reader = new ReadLines(2025, 3);
-    int inputNumber = 2; // use 1 for mock data, 2 for real data
+    private List<String> fileLines;
+    private final ReadLines reader = new ReadLines(2025, 3, 2);
     private void readData(){
-        // READ INPUT
-        fileLines = reader.readFile(inputNumber);
+        fileLines = reader.readFile();
     }
 
     public void part1(){
@@ -42,8 +39,8 @@ public class Day3 {
         for (int i = 0; i < fileLines.size(); i++) {
             String s = "";
             int joltDigits = 11; //incl 0
-            int oneLineMaxDigits = fileLines.get(0).length();
-            int currentMax = 0;
+            int oneLineMaxDigits = fileLines.getFirst().length();
+            int currentMax;
             int adjustValue = 0;
 
             while(joltDigits >= 0){
@@ -68,7 +65,7 @@ public class Day3 {
                     }
                 }
 
-                s = s + String.valueOf(currentMax);
+                s = s + (currentMax);
 
                 joltDigits--;
                 System.out.println(s);

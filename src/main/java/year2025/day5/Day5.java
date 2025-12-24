@@ -5,18 +5,16 @@ import java.util.*;
 
 public class Day5 {
 
-    List<String> fileLines;
-    long[][] ranges;
-    long[] numbers;
+    private List<String> fileLines;
+    private long[][] ranges;
+    private long[] numbers;
 
-    private final ReadLines reader = new ReadLines(2025, 5);
-    int inputNumber = 2; // use 1 for mock data, 2 for real data
+    private final ReadLines reader = new ReadLines(2025, 5, 2);
     private void readData(){
-        // READ INPUT
-        fileLines = reader.readFile(inputNumber);
+        fileLines = reader.readFile();
     }
 
-    public void processData(){
+    private void processData(){
         int rangesSize = 0;
         int numbersSize = 0;
         for (int i = 0; i < fileLines.size(); i++) {
@@ -53,10 +51,10 @@ public class Day5 {
 
         int result = 0;
 
-        for (int i = 0; i < numbers.length; i++) {
-            for (int j = 0; j < ranges.length; j++) {
-                if(numbers[i] >= ranges[j][0] && numbers[i] <= ranges[j][1]){
-                    result ++;
+        for (long number : numbers) {
+            for (long[] range : ranges) {
+                if (number >= range[0] && number <= range[1]) {
+                    result++;
                     break;
                 }
             }
@@ -72,15 +70,15 @@ public class Day5 {
 
         List<long[]> merged = new ArrayList<>();
 
-        for (int j = 0; j < ranges.length; j++) {
-            long start = ranges[j][0];
-            long end = ranges[j][1];
+        for (long[] range : ranges) {
+            long start = range[0];
+            long end = range[1];
 
             if (merged.isEmpty()) {
                 merged.add(new long[]{start, end});
 
             } else {
-                long[] last = merged.get(merged.size() - 1);
+                long[] last = merged.getLast();
 
                 if (start <= last[1] + 1) {
                     last[1] = Math.max(last[1], end);

@@ -5,25 +5,22 @@ import main.ReadLines;
 import java.util.List;
 
 public class Day4 {
-    List<String> fileLines;
-    int grid[][]; // 0 -> empty, 1 -> filled
-    int maxX;
+    private int[][] grid; // 0 -> empty, 1 -> filled
+    private int maxX;
     int maxY;
 
-    private final ReadLines reader = new ReadLines(2025, 4);
-    int inputNumber = 2;
+    private final ReadLines reader = new ReadLines(2025, 4, 2);
 
     public void readData(){
-        // READ INPUT
-        fileLines = reader.readFile(inputNumber);
+        List<String> fileLines = reader.readFile();
 
-        maxX = fileLines.get(0).length();
+        maxX = fileLines.getFirst().length();
         maxY = fileLines.size();
         grid = new int[maxY][maxX];
 
         for (int i = 0; i < maxY; i++) {
             for (int j = 0; j < maxX; j++) {
-                if(fileLines.get(i).substring(j, j+1).equals(".")){
+                if(fileLines.get(i).charAt(j) == '.'){
                     grid[i][j] = 0;
                 } else {
                     grid[i][j] = 1;
@@ -32,6 +29,9 @@ public class Day4 {
         }
     }
 
+    /**
+     * DEBUG METHOD
+     */
     public void drawGrid(){
         for (int i = 0; i < maxY; i++) {
             for (int j = 0; j < maxX; j++) {
@@ -43,10 +43,7 @@ public class Day4 {
 
     public void part1(){
         readData();
-        //drawGrid();
-
         int result = 0;
-
         for (int i = 0; i < maxY; i++) {
             for (int j = 0; j < maxX; j++) {
                 if(checkAdjacentFreeSpace(i, j) >= 5){

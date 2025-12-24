@@ -10,7 +10,6 @@ public class Day2 {
 
     private final ReadLines reader = new ReadLines(2025, 2, 2);
     private void readData(){
-        // READ INPUT
         fileLines = reader.readFile();
     }
 

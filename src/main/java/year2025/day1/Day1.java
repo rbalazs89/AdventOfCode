@@ -8,11 +8,10 @@ public class Day1 {
 
     List<String> fileLines;
 
-    private final ReadLines reader = new ReadLines(2025, 1);
-    int inputNumber = 2; // use 1 for mock data, 2 for real data
+    private final ReadLines reader = new ReadLines(2025, 1, 2);
     private void readData(){
         // READ INPUT
-        fileLines = reader.readFile(inputNumber);
+        fileLines = reader.readFile();
     }
 
     public void part1(){
@@ -25,7 +24,7 @@ public class Day1 {
         for (int i = 0; i < fileLines.size(); i++) {
             directions.add(fileLines.get(i).substring(0,1));
 
-            int number = Integer.valueOf(fileLines.get(i).substring(1));
+            int number = Integer.parseInt(fileLines.get(i).substring(1));
             if(number > 100){
                 number = number % 100;
             }
@@ -64,7 +63,7 @@ public class Day1 {
         for (int i = 0; i < fileLines.size(); i++) {
             directions.add(fileLines.get(i).substring(0,1));
 
-            int number = Integer.valueOf(fileLines.get(i).substring(1));
+            int number = Integer.parseInt(fileLines.get(i).substring(1));
             if(number > 100){
                 over100.add(number/100);
                 number = number % 100;
