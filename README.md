@@ -61,6 +61,38 @@ This repository contains my solutions to the advent of code puzzles.
 | Day 24 | ![Done](https://img.shields.io/badge/Done-brightgreen)                  | ![Done](https://img.shields.io/badge/Done-brightgreen)                                     |
 | Day 25 | ![Done](https://img.shields.io/badge/Done-brightgreen)                  | –                                                                                          |
 
+# Advent of Code 2017
+
+| Days   | Part 1                                                                  | Part 2                                                                                     |
+|--------|-------------------------------------------------------------------------|--------------------------------------------------------------------------------------------|
+| Day 1  | ![Done](https://img.shields.io/badge/Done-brightgreen)                  | ![Done](https://img.shields.io/badge/Done-brightgreen)                                     |
+| Day 2  | ![Done](https://img.shields.io/badge/Done-brightgreen)                  | ![Done](https://img.shields.io/badge/Done-brightgreen)                                     |
+| Day 3  | ![Done](https://img.shields.io/badge/Done-brightgreen)                  | ![Done](https://img.shields.io/badge/Done-brightgreen)                                     |
+| Day 4  | ![Done](https://img.shields.io/badge/Done-brightgreen)                  | ![Done](https://img.shields.io/badge/Done-brightgreen)                                     |
+| Day 5  | ![Done](https://img.shields.io/badge/Done-brightgreen)                  | ![Done](https://img.shields.io/badge/Done-brightgreen)                                     |
+| Day 6  | ![Done](https://img.shields.io/badge/Done-brightgreen)                  | ![Done](https://img.shields.io/badge/Done-brightgreen)                                     |
+| Day 7  | ![Done](https://img.shields.io/badge/Done-brightgreen)                  | ![Done](https://img.shields.io/badge/Done-brightgreen)                                     |
+| Day 8  | ![Done](https://img.shields.io/badge/Done-brightgreen)                  | ![Done](https://img.shields.io/badge/Done-brightgreen)                                     |
+| Day 9  | ![Done](https://img.shields.io/badge/Done-brightgreen)                  | ![Done](https://img.shields.io/badge/Done-brightgreen)                                     |
+| Day 10 | ![Done](https://img.shields.io/badge/Done-brightgreen)                  | ![Done](https://img.shields.io/badge/Done-brightgreen)                                     |
+| Day 11 | ![Done](https://img.shields.io/badge/Done-brightgreen)                  | ![Done](https://img.shields.io/badge/Done-brightgreen)                                     |
+| Day 12 | ![Done](https://img.shields.io/badge/Done-brightgreen)                  | ![Done](https://img.shields.io/badge/Done-brightgreen)                                     |
+| Day 13 | ![Done](https://img.shields.io/badge/Done-brightgreen)                  | ![Done](https://img.shields.io/badge/Done-brightgreen)                                     |
+| Day 14 | ![Done](https://img.shields.io/badge/Done-brightgreen)                  | ![Done](https://img.shields.io/badge/Done-brightgreen)                                     |
+| Day 15 | ![Done](https://img.shields.io/badge/Done-brightgreen)                  | ![Done](https://img.shields.io/badge/Done-brightgreen)                                     |
+| Day 16 | ![Done](https://img.shields.io/badge/Done-brightgreen)                  | ![Done](https://img.shields.io/badge/Done-brightgreen)                                     |
+| Day 17 | ![WIP](https://img.shields.io/badge/WIP-lightgrey)                      | ![WIP](https://img.shields.io/badge/WIP-lightgrey)                                                  |
+| Day 18 | ![WIP](https://img.shields.io/badge/WIP-lightgrey)                      | ![WIP](https://img.shields.io/badge/WIP-lightgrey)                                                  |
+| Day 19 | ![WIP](https://img.shields.io/badge/WIP-lightgrey)                      | ![WIP](https://img.shields.io/badge/WIP-lightgrey)                                                  |
+| Day 20 | ![WIP](https://img.shields.io/badge/WIP-lightgrey)                      | ![WIP](https://img.shields.io/badge/WIP-lightgrey)                                                  |
+| Day 21 | ![WIP](https://img.shields.io/badge/WIP-lightgrey)                      | ![WIP](https://img.shields.io/badge/WIP-lightgrey)                                                  |
+| Day 22 | ![WIP](https://img.shields.io/badge/WIP-lightgrey)                      | ![WIP](https://img.shields.io/badge/WIP-lightgrey)                                                  |
+| Day 23 | ![WIP](https://img.shields.io/badge/WIP-lightgrey)                      | ![WIP](https://img.shields.io/badge/WIP-lightgrey)                                                  |
+| Day 24 | ![WIP](https://img.shields.io/badge/WIP-lightgrey)                      | ![WIP](https://img.shields.io/badge/WIP-lightgrey)                                                  |
+| Day 25 | ![WIP](https://img.shields.io/badge/WIP-lightgrey)                      | –                                                                                          |
+
+
+
 # Advent of Code 2025
 
 | Days   | Part 1                                                 | Part 2                                                                                                                            |
