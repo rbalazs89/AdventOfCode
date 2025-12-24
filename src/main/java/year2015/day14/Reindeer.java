@@ -1,7 +1,6 @@
 package year2015.day14;
 
 class Reindeer {
-
     int velocity;
     int flyTime;
     int restTime;
