@@ -8,19 +8,18 @@ import java.util.List;
 import java.util.Set;
 
 public class Day23 {
-    List<String> fileLines;
+    private List<String> fileLines;
 
-    ArrayList<Register> registers = new ArrayList<>();
-    ArrayList<Instruction> instructions = new ArrayList<>();
+    private final ArrayList<Register> registers = new ArrayList<>();
+    private final ArrayList<Instruction> instructions = new ArrayList<>();
 
-    private final ReadLines reader = new ReadLines(2015, 23);
-    int inputNumber = 2; // use 1 for mock data, 2 for real data
-    public void readData(){
-        // READ INPUT
-        fileLines = reader.readFile(inputNumber);
+    //doesn't work on example input, it has no register b
+    private final ReadLines reader = new ReadLines(2015, 23, 2);
+    private void readData(){
+        fileLines = reader.readFile();
     }
 
-    public void processData() {
+    private void processData() {
         readData();
         registers.clear();
         instructions.clear();
@@ -92,7 +91,7 @@ public class Day23 {
         }
     }
 
-    public Register findRegisterByName(String name){
+    private Register findRegisterByName(String name){
         for (int i = 0; i < registers.size(); i++) {
             if(registers.get(i).name.equals(name)){
                 return registers.get(i);
@@ -115,7 +114,7 @@ public class Day23 {
 
     }
 
-    public int processOneInstruction(int index){
+    private int processOneInstruction(int index){
         Instruction instr = instructions.get(index);
         if(instr.name.equals("hlf")){
             instr.register.value = instr.register.value / 2;

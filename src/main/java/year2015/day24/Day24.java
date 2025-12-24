@@ -6,22 +6,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Day24 {
-    List<String> fileLines;
-    int inputFileIndex = 2;
-    int[] packages;
-    int estimatedMax = 0; // maxnumber * 1/3
-    int estimatedMaxPart2 = 0;
-    int fullSum = 0;
-    ArrayList<boolean[]> possibleSolutions = new ArrayList<>();
+    private List<String> fileLines;
+    private int[] packages;
+    private int estimatedMax = 0; // maxnumber * 1/3
+    private int estimatedMaxPart2 = 0;
+    private int fullSum = 0;
+    private final ArrayList<boolean[]> possibleSolutions = new ArrayList<>();
 
-    private final ReadLines reader = new ReadLines(2015, 24);
-    int inputNumber = 2; // use 1 for mock data, 2 for real data
-    public void readData(){
-        // READ INPUT
-        fileLines = reader.readFile(inputNumber);
+
+    private final ReadLines reader = new ReadLines(2015, 24, 2);
+    private void readData(){
+        fileLines = reader.readFile();
     }
 
-    public void processData(){
+    private void processData(){
         readData();
         packages = new int[fileLines.size()];
         estimatedMax = fileLines.size() / 3;
@@ -35,9 +33,7 @@ public class Day24 {
     public void part1(){
         processData();
         recursive(new boolean[packages.length], 0);
-        possibleSolutions.size();
 
-        boolean[] finalSolution = new boolean[packages.length];
         int minPackages = Integer.MAX_VALUE;
         long minQE = Long.MAX_VALUE;
         for (int i = 0; i < possibleSolutions.size(); i++) {
@@ -54,14 +50,13 @@ public class Day24 {
                 minPackages = currentPackages;
                 if(currentQE < minQE){
                     minQE = currentQE;
-                    finalSolution = current;
                 }
             }
         }
         System.out.println(minQE);
     }
 
-    public void recursive(boolean[] combination, int index){
+    private void recursive(boolean[] combination, int index){
         if(isItTooHigh(combination)){
             return;
         }
@@ -77,17 +72,14 @@ public class Day24 {
         combination[index] = false;
     }
 
-    public boolean isItTooHigh(boolean[] combination){
+    private boolean isItTooHigh(boolean[] combination){
         int points = 0;
-        for (int i = 0; i < combination.length; i++) {
-            if(combination[i]){
-                points ++;
+        for (boolean b : combination) {
+            if (b) {
+                points++;
             }
         }
-        if(points > estimatedMax){
-            return true;
-        }
-        return false;
+        return points > estimatedMax;
     }
 
     public void validateAndAdd(boolean[] combination){
@@ -129,7 +121,7 @@ public class Day24 {
 
     }
 
-    public void recursive2(boolean[] combination, int index){
+    private void recursive2(boolean[] combination, int index){
         if(isItTooHigh2(combination)){
             return;
         }
@@ -145,20 +137,17 @@ public class Day24 {
         combination[index] = false;
     }
 
-    public boolean isItTooHigh2(boolean[] combination){
+    private boolean isItTooHigh2(boolean[] combination){
         int points = 0;
-        for (int i = 0; i < combination.length; i++) {
-            if(combination[i]){
-                points ++;
+        for (boolean b : combination) {
+            if (b) {
+                points++;
             }
         }
-        if(points > estimatedMaxPart2){
-            return true;
-        }
-        return false;
+        return points > estimatedMaxPart2;
     }
 
-    public void validateAndAdd2(boolean[] combination){
+    private void validateAndAdd2(boolean[] combination){
         int currentSum = 0;
         for (int i = 0; i < combination.length; i++) {
             if(combination[i]){

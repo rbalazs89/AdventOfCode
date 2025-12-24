@@ -5,27 +5,24 @@ import main.ReadLines;
 import java.util.List;
 
 public class Day18 {
-    List<String> fileLines;
-    int inputFileIndex = 2;
-    char[][] grid;
-    char[][] grid2;
-    int maxX;
-    int maxY;
-    int steps = 100; // 6 for example input, 100 for real input
+    private List<String> fileLines;
+    private char[][] grid;
+    private char[][] grid2;
+    private int maxX;
+    private int maxY;
+    private final int steps = 100; // 6 for example input, 100 for real input
     /**
      A light which is on stays on when 2 or 3 neighbors are on, and turns off otherwise.
      A light which is off turns on if exactly 3 neighbors are on, and stays off otherwise.
      */
 
-    private final ReadLines reader = new ReadLines(2015, 18);
-    int inputNumber = 2; // use 1 for mock data, 2 for real data
-    public void readData(){
-        // READ INPUT
-        fileLines = reader.readFile(inputNumber);
+    private final ReadLines reader = new ReadLines(2015, 18, 2);
+    private void readData(){
+        fileLines = reader.readFile();
     }
 
-    public void processData(){
-        maxX = fileLines.get(0).length();
+    private void processData(){
+        maxX = fileLines.getFirst().length();
         maxY = fileLines.size();
         grid = new char[maxY][maxX];
         grid2 = new char[maxY][maxX];
@@ -54,8 +51,6 @@ public class Day18 {
             }
         }
         getResults();
-
-        //drawGrid();
     }
 
     public void getResults(){
@@ -100,11 +95,9 @@ public class Day18 {
             }
         }
         getResults();
-
-        //drawGrid();
     }
 
-    public char changeOneLight(int y, int x){
+    private char changeOneLight(int y, int x){
         int onAdj = 0;
         // top left
         if(y >= 1 && x >= 1){
@@ -176,7 +169,10 @@ public class Day18 {
         }
     }
 
-    public void drawGrid(){
+    /**
+     * DEBUG METHOD
+     */
+    private void drawGrid(){
         for (int i = 0; i < maxY; i++) {
             for (int j = 0; j < maxX; j++) {
                 System.out.print(grid[i][j]);

@@ -5,31 +5,17 @@ import main.ReadLines;
 import java.util.List;
 
 public class Day16 {
-    int[] trace = new int[10];
-    int[][] aunts = new int[10][500];
+    private final int[] trace = new int[10];
+    private final int[][] aunts = new int[10][500];
 
-    /**
-    children: 3
-    cats: 7
-    samoyeds: 2
-    pomeranians: 3
-    akitas: 0
-    vizslas: 0
-    goldfish: 5
-    trees: 3
-    cars: 2
-    perfumes: 1 */
-    String[] enums;
-    List<String> fileLines;
+    private List<String> fileLines;
 
-    private final ReadLines reader = new ReadLines(2015, 16);
-    int inputNumber = 2; // use 1 for mock data, 2 for real data
-    public void readData(){
-        // READ INPUT
-        fileLines = reader.readFile(inputNumber);
+    private final ReadLines reader = new ReadLines(2015, 16, 2);
+    private void readData(){
+        fileLines = reader.readFile(2);
     }
 
-    public void processData(){
+    private void processData(){
         trace[0] = 3;
         trace[1] = 7;
         trace[2] = 2;
@@ -46,7 +32,18 @@ public class Day16 {
             }
         }
 
-        enums = new String[]{
+        /**
+         children: 3
+         cats: 7
+         samoyeds: 2
+         pomeranians: 3
+         akitas: 0
+         vizslas: 0
+         goldfish: 5
+         trees: 3
+         cars: 2
+         perfumes: 1 */
+        String[] enums = new String[]{
                 "children",
                 "cats",
                 "samoyeds",
@@ -96,7 +93,7 @@ public class Day16 {
                 }
             }
             if(points == 3){
-                System.out.println("part1: " + (i + 1));
+                System.out.println((i + 1));
             }
         }
     }
@@ -126,7 +123,7 @@ public class Day16 {
                 }
             }
             if(points == 3){
-                System.out.println("part2: " + (i + 1));
+                System.out.println((i + 1));
             }
         }
     }

@@ -1,31 +1,23 @@
 package year2015.day17;
 
 import main.ReadLines;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class Day17 {
-    List<String> fileLines;
-    int[] containers;
-    int eggNog = 150; // 25 in sample, 150 in real;
-    int endResult = 0;
-    ArrayList<Integer> allContainers = new ArrayList<>();
-    int combinations = 0;
-    int minContainers = 3;
+    private List<String> fileLines;
+    private int[] containers;
+    private final int eggNog = 150; // 25 in sample, 150 in real;
+    private int combinations = 0;
 
-    private final ReadLines reader = new ReadLines(2015, 17);
-    int inputNumber = 2; // use 1 for mock data, 2 for real data
+    private final ReadLines reader = new ReadLines(2015, 17, 2);
     public void readData(){
-        // READ INPUT
-        fileLines = reader.readFile(inputNumber);
+        fileLines = reader.readFile();
     }
 
-    public void processFile(){
+    private void processFile(){
         containers = new int[fileLines.size()];
         for (int i = 0; i < fileLines.size(); i++) {
             containers[i] = Integer.parseInt(fileLines.get(i));
-            allContainers.add(Integer.parseInt(fileLines.get(i)));
         }
     }
 
@@ -35,7 +27,7 @@ public class Day17 {
 
         findCombinations(0, 0);
 
-        System.out.println("part1: " + combinations);
+        System.out.println(combinations);
     }
 
     public void part2(){
@@ -45,7 +37,7 @@ public class Day17 {
 
         findCombinations2(0, 0, 0);
 
-        System.out.println("part2: " + combinations);
+        System.out.println(combinations);
     }
     private void findCombinations2(int index, int currentSum, int currentContainers) {
         // if reached eggnog
@@ -60,6 +52,7 @@ public class Day17 {
         // branching path 2 -> include current and see then go next
         if (currentSum + containers[index] <= eggNog) {
             currentSum = currentSum + containers[index];
+            int minContainers = 3;
             if(currentSum == eggNog && currentContainers == minContainers){
                 combinations++;
             }
@@ -88,34 +81,6 @@ public class Day17 {
             else {
                 findCombinations(index + 1, currentSum);
             }
-        }
-    }
-
-    // for sample only
-    public void part1SampleOnly() {
-        readData();
-        processFile();
-
-        for (int i = 0; i < 2; i++) {
-            for (int j = 0; j < 2; j++) {
-                for (int k = 0; k < 2; k++) {
-                    for (int l = 0; l < 2; l++) {
-                        for (int m = 0; m < 2; m++) {
-                            endResult += getSum(i, j, k, l, m);
-                        }
-                    }
-                }
-            }
-        }
-
-        System.out.println(endResult);
-    }
-
-    public int getSum(int i, int j, int k, int l, int m){
-        if( i * containers[0] + j * containers[1] + k * containers[2] + l * containers[3] + m * containers[4] == eggNog){
-            return 1;
-        } else {
-            return 0;
         }
     }
 }

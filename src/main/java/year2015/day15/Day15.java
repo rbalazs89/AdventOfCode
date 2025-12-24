@@ -8,19 +8,16 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Day15 {
-    List<String> fileLines;
-    int inputFileIndex = 2;
-    ArrayList<Ingredient> ingredients = new ArrayList<>();
-    int finalScore = 0;
+    private List<String> fileLines;
+    private final ArrayList<Ingredient> ingredients = new ArrayList<>();
 
-    private final ReadLines reader = new ReadLines(2015, 15);
-    int inputNumber = 2; // use 1 for mock data, 2 for real data
-    public void readData(){
-        // READ INPUT
-        fileLines = reader.readFile(inputNumber);
+    // doesn't work for sample input, only for exactly 4 ingredients
+    private final ReadLines reader = new ReadLines(2015, 15, 2);
+    private void readData(){
+        fileLines = reader.readFile();
     }
 
-    public void processData(){
+    private void processData(){
         ingredients.clear();
         for (int i = 0; i < fileLines.size(); i++) {
             String line = fileLines.get(i);
@@ -58,7 +55,7 @@ public class Day15 {
                 }
             }
         }
-        System.out.println("part1 result: " + maxScore);
+        System.out.println(maxScore);
     }
 
     public void part2(){
@@ -93,11 +90,11 @@ public class Day15 {
                 }
             }
         }
-        System.out.println("part2 result: " + maxScore);
+        System.out.println(maxScore);
 
     }
 
-    long score(){
+    private long score(){
         int[] score = new int[4];
         for (int i = 0; i < ingredients.size(); i++) {
             score[0] += ingredients.get(i).capacity * ingredients.get(i).spoons;
@@ -110,9 +107,9 @@ public class Day15 {
             score[i] = Math.max(score[i], 0);
         }
 
-        finalScore = 1;
-        for (int i = 0; i < score.length; i++) {
-            finalScore = finalScore * score[i];
+        int finalScore = 1;
+        for (int j : score) {
+            finalScore = finalScore * j;
         }
 
         return finalScore;

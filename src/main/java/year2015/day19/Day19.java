@@ -7,19 +7,17 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Day19 {
-    List<String> fileLines;
-    int inputFileIndex = 2;
-    ArrayList<String[]> table = new ArrayList<>();
-    String line = "";
+    private final ReadLines reader = new ReadLines(2015, 19, 2);
+    private List<String> fileLines;
+    private final ArrayList<String[]> table = new ArrayList<>();
+    private String line = "";
 
-    private final ReadLines reader = new ReadLines(2015, 19);
-    int inputNumber = 2; // use 1 for mock data, 2 for real data
-    public void readData(){
-        // READ INPUT
-        fileLines = reader.readFile(inputNumber);
+
+    private void readData(){
+        fileLines = reader.readFile();
     }
 
-    public void processData(){
+    private void processData(){
         readData();
         for (int i = 0; i < fileLines.size(); i++) {
             if(fileLines.get(i).isEmpty()){
@@ -31,13 +29,15 @@ public class Day19 {
             current = current.replaceAll(" ", "");
 
             String[] parts = current.split("=>");
-            table.add(new String[] {parts[0], parts[1]});
+
+            if(parts.length != 1){
+                table.add(new String[] {parts[0], parts[1]});
+            }
         }
     }
 
     public void part1(){
         processData();
-
         Set<String> names = new HashSet<>();
 
         for (int i = 0; i < table.size(); i++) {

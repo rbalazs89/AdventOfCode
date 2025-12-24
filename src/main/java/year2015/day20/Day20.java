@@ -6,33 +6,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Day20 {
-    List<String> fileLines = new ArrayList<>();
+    private List<String> fileLines = new ArrayList<>();
+    private final ReadLines reader = new ReadLines(2015, 20, 1);
 
-    private final ReadLines reader = new ReadLines(2015, 20);
-    int inputNumber = 2; // use 1 for mock data, 2 for real data
     public void readData(){
-        // READ INPUT
-        fileLines = reader.readFile(inputNumber);
-    }
-
-    public void part321(){
-        int limit = 36000000;
-        long[] houses = new long[limit];
-
-        outerloop:
-        for (int i = 1; i < limit; i++) { // elf
-            for (int j = i; j < limit; j += i) { // house
-                houses[j] += 10L * i;
-                if(houses[j] >= limit){
-                    System.out.println(i + " " + j);
-                    break outerloop;
-                }
-            }
-        }
+        fileLines = reader.readFile();
     }
 
     public void part1(){
-        int target = 36000000;
+        readData();
+        int target = Integer.parseInt(fileLines.getFirst());
         int limit = 1000000;
 
         long[] houses = new long[limit];
@@ -52,7 +35,8 @@ public class Day20 {
     }
 
     public void part2(){
-        int target = 36000000;
+        readData();
+        int target = Integer.parseInt(fileLines.getFirst());
         int limit = 10000000;
 
         long[] houses = new long[limit];
