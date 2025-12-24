@@ -1,23 +1,23 @@
 package year2015.day6;
 
 import main.ReadLines;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class Day6 {
 
-    List<String> fileLines;
-    List<Instruction> instructions = new ArrayList<>();
-    int[][] grid = new int[1000][1000];
+    private List<String> fileLines;
+    private final List<Instruction> instructions = new ArrayList<>();
+    private int[][] grid = new int[1000][1000];
 
+    private final ReadLines reader = new ReadLines(2015, 6, 2);
     public void readData(){
-        // READ INPUT
-        ReadLines reader = new ReadLines();
-        fileLines = reader.readFile(2);
+        fileLines = reader.readFile();
     }
 
-    public void createInstructionsFromInput(){
+    private void createInstructionsFromInput(){
+        readData();
+        instructions.clear();
         for (int i = 0; i < fileLines.size(); i++) {
             int type;
             int[] start = new int[2];
@@ -52,7 +52,6 @@ public class Day6 {
     }
 
     public void part1(){
-        readData();
         createInstructionsFromInput();
 
         for (int i = 0; i < instructions.size(); i++) {
@@ -71,7 +70,7 @@ public class Day6 {
         System.out.println(result);
     }
 
-    void applyOneInstruction(Instruction instruction){
+    private void applyOneInstruction(Instruction instruction){
         if(instruction.type == 1){
             for (int i = instruction.start[0]; i <= instruction.end[0]; i++) {
                 for (int j = instruction.start[1]; j <= instruction.end[1]; j++) {
@@ -129,6 +128,7 @@ public class Day6 {
     }
 
     public void part2(){
+        readData();
         grid = new int[1000][1000];
 
         for (int i = 0; i < instructions.size(); i++) {

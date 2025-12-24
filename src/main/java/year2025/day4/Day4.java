@@ -10,10 +10,12 @@ public class Day4 {
     int maxX;
     int maxY;
 
+    private final ReadLines reader = new ReadLines(2025, 4);
+    int inputNumber = 2;
+
     public void readData(){
         // READ INPUT
-        ReadLines reader = new ReadLines();
-        fileLines = reader.readFile(2);
+        fileLines = reader.readFile(inputNumber);
 
         maxX = fileLines.get(0).length();
         maxY = fileLines.size();
