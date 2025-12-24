@@ -71,35 +71,15 @@ public class Day8 {
 
     private void applyInstruction(Instruction instruction){
         // determine if instruction effect true
-        boolean effect;
-        switch (instruction.comparisonType()){
-            case "==" :
-                effect = instruction.comparedRegister().getValue() == instruction.comparisonNumber();
-                break;
-
-            case "<" :
-                effect = instruction.comparedRegister().getValue() < instruction.comparisonNumber();
-                break;
-
-            case "<=" :
-                effect = instruction.comparedRegister().getValue() <= instruction.comparisonNumber();
-                break;
-
-            case ">" :
-                effect = instruction.comparedRegister().getValue() > instruction.comparisonNumber();
-                break;
-
-            case ">=" :
-                effect = instruction.comparedRegister().getValue() >= instruction.comparisonNumber();
-                break;
-
-            case "!=" :
-                effect = instruction.comparedRegister().getValue() != instruction.comparisonNumber();
-                break;
-
-            default:
-                throw new IllegalStateException(instruction.comparisonType() + " comparison type not processed");
-        }
+        boolean effect = switch (instruction.comparisonType()) {
+            case "==" -> instruction.comparedRegister().getValue() == instruction.comparisonNumber();
+            case "<" -> instruction.comparedRegister().getValue() < instruction.comparisonNumber();
+            case "<=" -> instruction.comparedRegister().getValue() <= instruction.comparisonNumber();
+            case ">" -> instruction.comparedRegister().getValue() > instruction.comparisonNumber();
+            case ">=" -> instruction.comparedRegister().getValue() >= instruction.comparisonNumber();
+            case "!=" -> instruction.comparedRegister().getValue() != instruction.comparisonNumber();
+            default -> throw new IllegalStateException(instruction.comparisonType() + " comparison type not processed");
+        };
         if(!effect){
             return;
         }

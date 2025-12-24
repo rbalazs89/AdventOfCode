@@ -13,7 +13,6 @@ public class Day18 {
     private int maxCol;
 
     private void readData(){
-        // READ INPUT
         fileLines = reader.readFile();
     }
 

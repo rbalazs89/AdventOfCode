@@ -19,7 +19,7 @@ public class Day13 {
 
     // sets people variable
     private void getPPL(){
-        String firstName = fileLines.get(0).split(" ")[0];
+        String firstName = fileLines.getFirst().split(" ")[0];
         for (int i = 0; i < fileLines.size(); i++) {
             if(!fileLines.get(i).split(" ")[0].equals(firstName)){
                 people = i + 1;
@@ -63,6 +63,7 @@ public class Day13 {
             Edge e = new Edge();
             e.vertex1 = v1;
             e.vertex2 = v2;
+            assert v1 != null;
             if(v1.edges == null){
                 v1.edges = new Edge[people - 1];
             }
@@ -81,10 +82,10 @@ public class Day13 {
     }
 
     private Vertex findByName(String name){
-        for (int i = 0; i < table.length; i++) {
-            if(table[i] != null){
-                if(table[i].name.equals(name)){
-                    return table[i];
+        for (Vertex vertex : table) {
+            if (vertex != null) {
+                if (vertex.name.equals(name)) {
+                    return vertex;
                 }
             }
         }
@@ -117,7 +118,7 @@ public class Day13 {
         getPPL();
         processFile();
 
-        String firstName = fileLines.get(0).split(" ")[0];
+        String firstName = fileLines.getFirst().split(" ")[0];
         for (int i = 0; i < fileLines.size(); i++) {
             if(!fileLines.get(i).split(" ")[0].equals(firstName)){
                 people = i + 2;
@@ -148,7 +149,7 @@ public class Day13 {
 
                 // backtrack
                 used[i] = false;
-                current.remove(current.size() - 1);
+                current.removeLast();
             }
         }
     }
@@ -160,12 +161,12 @@ public class Day13 {
             Vertex right;
             Vertex left;
             if(i == seating.size() - 1){
-                right = seating.get(0);
+                right = seating.getFirst();
             } else {
                 right = seating.get(i + 1);
             }
             if(i == 0){
-                left = seating.get(seating.size() - 1);
+                left = seating.getLast();
             } else {
                 left = seating.get(i - 1);
             }

@@ -8,7 +8,7 @@ import java.util.List;
 public class Day24 {
     private List<String> fileLines;
     private int[] packages;
-    private int estimatedMax = 0; // maxnumber * 1/3
+    private int estimatedMax = 0; // maxNumber * 1/3
     private int estimatedMaxPart2 = 0;
     private int fullSum = 0;
     private final ArrayList<boolean[]> possibleSolutions = new ArrayList<>();

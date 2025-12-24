@@ -8,10 +8,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Day21 {
-    private final ReadLines reader = new ReadLines(2016, 21);
+    private final ReadLines reader = new ReadLines(2016, 21, 2);
     private List<String> fileLines; // lines from txt file
-    private static final int MOCK_INPUT = 1;
-    private static final int REAL_INPUT = 2;
 
     private static final String startingPassword = "abcdefgh"; // starting password from task description
     private static final String endingPassword = "fbgdceah"; // ending password for part 2 to unscramble
@@ -19,7 +17,7 @@ public class Day21 {
     ArrayList<Instruction> instructions = new ArrayList<>();
 
     private void readData(){
-        fileLines = reader.readFile(REAL_INPUT);
+        fileLines = reader.readFile();
     }
 
     private void prepare() {
@@ -49,12 +47,12 @@ public class Day21 {
             }
             else if (line.contains("swap") && line.contains("letter")){
                 instruction.type = 2;
-                for (int j = 0; j < parts.length; j++) {
-                    if(parts[j].length() == 1){
-                        if(instruction.letter1 == '\u0000'){
-                            instruction.letter1 = parts[j].charAt(0);
+                for (String part : parts) {
+                    if (part.length() == 1) {
+                        if (instruction.letter1 == '\u0000') {
+                            instruction.letter1 = part.charAt(0);
                         } else {
-                            instruction.letter2 = parts[j].charAt(0);
+                            instruction.letter2 = part.charAt(0);
                             break;
                         }
                     }

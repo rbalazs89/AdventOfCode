@@ -26,7 +26,7 @@ public class Day3 {
         // Starting house
         newHouse(0, 0);
 
-        String instructions = fileLines.get(0);
+        String instructions = fileLines.getFirst();
 
         for (int i = 0; i < instructions.length(); i++) {
             char move = instructions.charAt(i);

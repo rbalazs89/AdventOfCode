@@ -127,9 +127,9 @@ public class Day9 {
 
         // find lowest overall
         int part1Result = Integer.MAX_VALUE;
-        for (int i = 0; i < results.length; i++) {
-            if(results[i] < part1Result){
-                part1Result = results[i];
+        for (int result : results) {
+            if (result < part1Result) {
+                part1Result = result;
             }
         }
         System.out.println(part1Result);
@@ -160,7 +160,7 @@ public class Day9 {
 
                 // backtrack
                 used[i] = false;
-                current.remove(current.size() - 1);
+                current.removeLast();
             }
         }
     }

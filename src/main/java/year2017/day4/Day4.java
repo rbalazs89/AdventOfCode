@@ -27,8 +27,8 @@ public class Day4 {
             Set<String> words = new HashSet<>();
 
             boolean isOkPasscode = true;
-            for (int j = 0; j < parts.length; j++) {
-                if(!words.add(parts[j])){
+            for (String part : parts) {
+                if (!words.add(part)) {
                     isOkPasscode = false;
                     break;
                 }
@@ -50,9 +50,9 @@ public class Day4 {
             String[] parts = line.split(" ");
             Set<String> words = new HashSet<>();
             boolean isOkPasscode = true;
-            for (int j = 0; j < parts.length; j++) {
-                String rearranged = sortLetters(parts[j]);
-                if(!words.add(rearranged)){
+            for (String part : parts) {
+                String rearranged = sortLetters(part);
+                if (!words.add(rearranged)) {
                     isOkPasscode = false;
                     break;
                 }

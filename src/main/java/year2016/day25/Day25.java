@@ -10,7 +10,6 @@ public class Day25 {
     // setup:
     private final ReadLines reader = new ReadLines(2016, 25, 2);
     private List<String> fileLines; // lines from txt file
-    private boolean prepared = false;
 
     private final ArrayList<Register> registers = new ArrayList<>();
     private final ArrayList<Instruction> instructions = new ArrayList<>();
@@ -23,9 +22,7 @@ public class Day25 {
     }
 
     private void prepare(){
-        if(!prepared){
-            readData();
-        }
+        readData();
         registers.clear();
         instructions.clear();
         for (int i = 0; i < fileLines.size(); i++) {
@@ -91,7 +88,6 @@ public class Day25 {
             }
             instructions.add(instruction);
         }
-        prepared = true;
     }
 
     public void part1(){
@@ -129,6 +125,7 @@ public class Day25 {
         for (int i = 0; i < signals.size(); i++) {
             if(i % 2 == signals.get(i) % 2) {
                 isTheSecondScenarioGood = false;
+                break;
             }
         }
         signals.clear();
@@ -194,23 +191,20 @@ public class Day25 {
 
                 Instruction instructionToModify = instructions.get(toModify);
 
-                if (instructionToModify.type.equals("inc")) {
-                    instructionToModify.type = "dec";
-                } else if (instructionToModify.type.equals("dec")) {
-                    instructionToModify.type = "inc";
-                } else if (instructionToModify.type.equals("tgl")) {
-                    instructionToModify.type = "inc";
-                } else if (instructionToModify.type.equals("out")) {
-                    instructionToModify.type = "inc";
-                } else if (instructionToModify.type.equals("jnz")) {
-                    instructionToModify.type = "cpy";
-                    if (instructionToModify.secondArgumentInteger != null) {
-                        instructionToModify.valid = false;
-                        return 0;
+                switch (instructionToModify.type) {
+                    case "inc" -> instructionToModify.type = "dec";
+                    case "dec", "tgl", "out" -> instructionToModify.type = "inc";
+                    case "jnz" -> {
+                        instructionToModify.type = "cpy";
+                        if (instructionToModify.secondArgumentInteger != null) {
+                            instructionToModify.valid = false;
+                            return 0;
+                        }
                     }
-                } else if (instructionToModify.type.equals("cpy")) {
-                    instructionToModify.type = "jnz";
-                    instructionToModify.valid = true;
+                    case "cpy" -> {
+                        instructionToModify.type = "jnz";
+                        instructionToModify.valid = true;
+                    }
                 }
                 return 0;
             }

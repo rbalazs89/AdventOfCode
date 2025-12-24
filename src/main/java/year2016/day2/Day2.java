@@ -7,9 +7,8 @@ import java.util.List;
 
 public class Day2 {
     private List<String> fileLines;
-    private final ReadLines reader = new ReadLines(2016, 2,1);
+    private final ReadLines reader = new ReadLines(2016, 2,2);
     private void readData(){
-        // READ INPUT
         fileLines = reader.readFile();
     }
     /*
@@ -43,9 +42,9 @@ public class Day2 {
             }
             buttonPresses.add(new int[]{x, y});
         }
-        String result = "";
+        StringBuilder result = new StringBuilder();
         for (int i = 0; i < buttonPresses.size(); i++) {
-            result = result + (buttonPresses.get(i)[0] + 1 + (buttonPresses.get(i)[1] * 3));
+            result.append(buttonPresses.get(i)[0] + 1 + (buttonPresses.get(i)[1] * 3));
         }
         System.out.println(result);
     }

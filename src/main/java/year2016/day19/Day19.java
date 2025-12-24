@@ -13,7 +13,6 @@ public class Day19 {
     private final ArrayList<Integer> elves = new ArrayList<>();
 
     private void readData(){
-        // READ INPUT
         fileLines = reader.readFile();
     }
 

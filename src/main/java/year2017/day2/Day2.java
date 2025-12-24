@@ -11,7 +11,7 @@ public class Day2 {
     private final ReadLines reader = new ReadLines(2017, 2, 2);
     private List<String> fileLines; // lines from txt file
 
-    private final ArrayList<ArrayList<Integer>> numbersTable = new ArrayList<>(); // doesn't change once assigned
+    private final ArrayList<ArrayList<Integer>> numbersTable = new ArrayList<>();
     private void readData(){
         fileLines = reader.readFile();
     }

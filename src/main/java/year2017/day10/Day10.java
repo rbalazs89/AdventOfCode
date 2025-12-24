@@ -111,7 +111,7 @@ public class Day10 {
         for (int num : blocks) {
             sb.append(String.format("%02x", num));
         }
-        System.out.println(sb.toString());
+        System.out.println(sb);
 
     }
 

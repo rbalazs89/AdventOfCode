@@ -63,8 +63,8 @@ public class Day6 {
 
             // save current state in set
             StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < numbers.length; i++) {
-                sb.append(numbers[i]);
+            for (int number : numbers) {
+                sb.append(number);
                 sb.append(",");
             }
             if(firstDuplicate.contentEquals(sb)){
@@ -89,8 +89,8 @@ public class Day6 {
 
     private int findIndex(int[] numbers){
         int findMax = Integer.MIN_VALUE;
-        for (int i = 0; i < numbers.length; i++) {
-            findMax = Math.max(findMax, numbers[i]);
+        for (int number : numbers) {
+            findMax = Math.max(findMax, number);
         }
 
         for (int i = 0; i < numbers.length; i++) {

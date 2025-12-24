@@ -6,13 +6,13 @@ import java.util.List;
 
 public class Day9 {
     private final ReadLines reader = new ReadLines(2017, 9, 2);
-    private List<String> fileLines; // lines from txt file
 
     // puzzle:
     private String stream;
 
     private void readData() {
-        fileLines = reader.readFile();
+        // lines from txt file
+        List<String> fileLines = reader.readFile();
         stream = fileLines.getFirst();
     }
 
@@ -23,7 +23,7 @@ public class Day9 {
         boolean insideGarbage = false;
         for (int i = 0; i < stream.length(); i++) {
             char c = stream.charAt(i);
-            if(!checkIfSafe(i)){
+            if(checkIfNotSafe(i)){
                 continue;
             }
 
@@ -54,7 +54,7 @@ public class Day9 {
         boolean insideGarbage = false;
         for (int i = 0; i < stream.length(); i++) {
             char c = stream.charAt(i);
-            if(!checkIfSafe(i)){
+            if(checkIfNotSafe(i)){
                 continue;
             }
 
@@ -78,9 +78,9 @@ public class Day9 {
     }
 
     // no stream starts with '!'
-    private boolean checkIfSafe(int index){
+    private boolean checkIfNotSafe(int index){
         if(index == 0){
-            return true;
+            return false;
         }
 
         int counter = 0;
@@ -94,6 +94,6 @@ public class Day9 {
         }
 
         // exclamation cancels effect if number of exclamation marks right before character are odd
-        return counter % 2 == 0;
+        return counter % 2 != 0;
     }
 }

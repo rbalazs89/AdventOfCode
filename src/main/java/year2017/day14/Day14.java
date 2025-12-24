@@ -17,7 +17,7 @@ public class Day14 {
     private int[] rope;
 
     // part 2:
-    private char[][] grid = new char[GRID_SIZE][GRID_SIZE]; // grid[y][x]
+    private final char[][] grid = new char[GRID_SIZE][GRID_SIZE]; // grid[y][x]
 
     private void readData() {
         fileLines = reader.readFile();

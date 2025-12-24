@@ -21,7 +21,7 @@ public class Day4 {
         String prefix = "00000";
         int number = 1;
 
-        MessageDigest md = null;
+        MessageDigest md;
         try {
             md = MessageDigest.getInstance("MD5");
         } catch (NoSuchAlgorithmException e) {
@@ -48,7 +48,7 @@ public class Day4 {
         String prefix = "000000";
         int number = 1;
 
-        MessageDigest md = null;
+        MessageDigest md;
         try {
             md = MessageDigest.getInstance("MD5");
         } catch (NoSuchAlgorithmException e) {

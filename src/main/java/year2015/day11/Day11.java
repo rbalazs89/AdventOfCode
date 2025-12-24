@@ -22,14 +22,14 @@ public class Day11 {
 
         char[] pw = new char[8];
         for (int i = 0; i < pw.length; i++) {
-            pw[i] = fileLines.get(0).charAt(i);
+            pw[i] = fileLines.getFirst().charAt(i);
         }
 
         while(true){
             pw = incrementPW(pw);
             if(checkFirstRule(pw) && checkSecondRule(pw) && checkThirdRule(pw)){
-                for (int i = 0; i < pw.length; i++) {
-                    System.out.print(((char)(pw[i])));
+                for (char c : pw) {
+                    System.out.print(((char) c));
                 }
                 System.out.println();
                 part1result = pw;
@@ -49,8 +49,8 @@ public class Day11 {
         while(true){
             pw = incrementPW(pw);
             if(checkFirstRule(pw) && checkSecondRule(pw) && checkThirdRule(pw)){
-                for (int i = 0; i < pw.length; i++) {
-                    System.out.print(((char)(pw[i])));
+                for (char c : pw) {
+                    System.out.print(((char) c));
                 }
                 break;
             }
@@ -81,8 +81,8 @@ public class Day11 {
      * DEBUG METHOD
      */
     public void printPW(char[] c){
-        for (int i = 0; i < c.length; i++) {
-            System.out.print((char)(c[i]));
+        for (char value : c) {
+            System.out.print((char) value);
         }
         System.out.println();
     }

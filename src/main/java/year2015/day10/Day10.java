@@ -14,7 +14,7 @@ public class Day10 {
     public void part1(){
         readData();
         String input = fileLines.getFirst();
-        String processedString = "";
+        StringBuilder processedString = new StringBuilder();
         char current = ' ';
 
         for (int j = 0; j < 40; j++) {
@@ -34,14 +34,14 @@ public class Day10 {
                         break;
                     }
                 }
-                processedString = processedString + counter + current;
+                processedString.append(counter).append(current);
                 input = input.substring(counter);
                 if(input.isEmpty() || counter == 0){
                     break;
                 }
             }
-            input = processedString;
-            processedString = "";
+            input = processedString.toString();
+            processedString = new StringBuilder();
         }
         System.out.println(input.length());
     }

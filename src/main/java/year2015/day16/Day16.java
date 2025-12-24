@@ -32,7 +32,7 @@ public class Day16 {
             }
         }
 
-        /**
+        /*
          children: 3
          cats: 7
          samoyeds: 2

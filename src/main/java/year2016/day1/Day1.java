@@ -41,7 +41,7 @@ public class Day1 {
                 case "right" -> currentY += step;
                 case "down" -> currentX -= step;
                 case "left" -> currentY -= step;
-                default -> System.out.println("problem");
+                default -> throw new IllegalStateException("direction not recognized");
             }
         }
         System.out.println(Math.abs(currentX) + Math.abs(currentY));
@@ -78,8 +78,7 @@ public class Day1 {
                 }
             }
         }
-        System.out.println("beep");
-        return "-1";
+        throw new IllegalStateException("Instruction not recognized");
     }
 
     public void part2(){

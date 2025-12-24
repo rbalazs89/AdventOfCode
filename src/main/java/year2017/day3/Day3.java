@@ -137,7 +137,6 @@ public class Day3 {
         int points = 0;
 
         // go top after
-        points = 0;
         for (int i = 0; i < steps.size(); i++) {
             int value = grid[x + steps.get(i)[0]][y + steps.get(i)[1]];
             if((i == 0 || i == 6) && value == 0){
@@ -221,11 +220,7 @@ public class Day3 {
         for (int i = 0; i < maxLength; i++) {
             for (int j = 0; j < maxLength; j++) {
                 int length = 4 - String.valueOf(grid[j][i]).length();
-                String filler = "";
-                for (int k = 0; k < length; k++) {
-                    filler += " ";
-                }
-                System.out.print(grid[j][i] + filler);
+                System.out.print(grid[j][i] + " ".repeat(Math.max(0, length)));
             }
             System.out.println();
         }

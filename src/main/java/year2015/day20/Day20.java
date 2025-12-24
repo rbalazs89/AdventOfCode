@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Day20 {
     private List<String> fileLines = new ArrayList<>();
-    private final ReadLines reader = new ReadLines(2015, 20, 1);
+    private final ReadLines reader = new ReadLines(2015, 20, 2);
 
     public void readData(){
         fileLines = reader.readFile();

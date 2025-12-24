@@ -16,7 +16,7 @@ public class Day12 {
 
     public void part1(){
         readData();
-        String line = fileLines.get(0);
+        String line = fileLines.getFirst();
 
         Pattern p = Pattern.compile("-?\\d+");
         Matcher m = p.matcher(line);

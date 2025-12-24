@@ -307,11 +307,8 @@ public class Day7 {
         }
 
         for (int i = 0; i < instructions.size(); i++) {
-            instructions.get(i).done = false;
 
-            if(instructions.get(i).out.name.equals("b")){
-                instructions.get(i).done = true;
-            }
+            instructions.get(i).done = instructions.get(i).out.name.equals("b");
         }
 
         findWire("b").value = part1Result;
