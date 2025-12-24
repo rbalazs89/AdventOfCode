@@ -3,7 +3,7 @@ package year2025.day9;
 import javax.swing.*;
 import java.awt.*;
 
-public class PolygonViewer extends JPanel {
+class PolygonViewer extends JPanel {
 
     int[][] points; // points[0][] = x, points[1][] = y
 
