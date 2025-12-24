@@ -7,10 +7,11 @@ import java.util.List;
 public class Day6 {
     List<String> fileLines;
 
-    public void readData(){
+    private final ReadLines reader = new ReadLines(2025, 6);
+    int inputNumber = 2; // use 1 for mock data, 2 for real data
+    private void readData(){
         // READ INPUT
-        ReadLines reader = new ReadLines();
-        fileLines = reader.readFile(2);
+        fileLines = reader.readFile(inputNumber);
     }
 
     public void part1(){
@@ -22,7 +23,7 @@ public class Day6 {
             fileLines.set(i, fileLines.get(i).replaceAll(" {2,}", " "));
         }
 
-        long[][] numbers = new long[fileLines.size() - 1][fileLines.get(0).split(" ").length];
+        long[][] numbers = new long[fileLines.size() - 1][fileLines.getFirst().split(" ").length];
 
         for (int i = 0; i < fileLines.size() - 1; i++) {
             String[] parts = fileLines.get(i).split(" ");
@@ -30,7 +31,7 @@ public class Day6 {
                 numbers[i][j] = Integer.parseInt(parts[j]);
             }
         }
-        String[] symbols = fileLines.get(fileLines.size() - 1).split(" ");
+        String[] symbols = fileLines.getLast().split(" ");
 
         //solution:
         long[] result = new long[numbers[0].length];
@@ -50,8 +51,8 @@ public class Day6 {
         }
 
         long part1 = 0;
-        for (int i = 0; i < result.length; i++) {
-            part1 = part1 + result[i];
+        for (long l : result) {
+            part1 = part1 + l;
         }
         System.out.println(part1);
 
