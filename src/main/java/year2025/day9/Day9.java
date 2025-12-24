@@ -11,10 +11,11 @@ public class Day9 {
     int inputFileIndex = 2;
     int[][] points;
 
-    public void readData() {
+    private final ReadLines reader = new ReadLines(2025, 9);
+    int inputNumber = 2; // use 1 for mock data, 2 for real data
+    private void readData(){
         // READ INPUT
-        ReadLines reader = new ReadLines();
-        fileLines = reader.readFile(inputFileIndex);
+        fileLines = reader.readFile(inputNumber);
     }
 
     public void processData(){

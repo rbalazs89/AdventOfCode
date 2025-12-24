@@ -7,13 +7,13 @@ import java.util.List;
 
 public class Day12 {
     List<String> fileLines;
-    int inputFileIndex = 2;
     ArrayList<Configuration> configurations = new ArrayList<>();
 
-    public void readData() {
+    private final ReadLines reader = new ReadLines(2025, 10);
+    int inputNumber = 2; // use 1 for mock data, 2 for real data
+    private void readData(){
         // READ INPUT
-        ReadLines reader = new ReadLines();
-        fileLines = reader.readFile(inputFileIndex);
+        fileLines = reader.readFile(inputNumber);
     }
 
     public void processData(){

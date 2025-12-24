@@ -7,7 +7,6 @@ import java.util.*;
 public class Day8 {
 
     List<String> fileLines;
-    int inputFileIndex = 2;
     int boxesToConnect = 1000; // 10 for sample input, 1000 for real input
     long part2X1 = 0;
     long part2X2 = 0;
@@ -15,11 +14,13 @@ public class Day8 {
     Box[] boxes;
     ArrayList<HashSet<Integer>> circuits = new ArrayList<>();
 
-    public void readData(){
+    private final ReadLines reader = new ReadLines(2025, 8);
+    int inputNumber = 2; // use 1 for mock data, 2 for real data
+    private void readData(){
         // READ INPUT
-        ReadLines reader = new ReadLines();
-        fileLines = reader.readFile(inputFileIndex);
+        fileLines = reader.readFile(inputNumber);
     }
+
 
     public void processInput(){
         readData();

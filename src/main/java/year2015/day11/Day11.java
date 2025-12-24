@@ -6,13 +6,12 @@ import java.util.List;
 
 public class Day11 {
 
-    List<String> fileLines;
-    char[] part1result;
+    private List<String> fileLines;
+    private char[] part1result;
 
-    public void readData(){
-        // READ INPUT
-        ReadLines reader = new ReadLines();
-        fileLines = reader.readFile(2);
+    private final ReadLines reader = new ReadLines(2015, 11, 2);
+    private void readData(){
+        fileLines = reader.readFile();
     }
 
     public void part1(){
@@ -78,6 +77,9 @@ public class Day11 {
         return c;
     }
 
+    /**
+     * DEBUG METHOD
+     */
     public void printPW(char[] c){
         for (int i = 0; i < c.length; i++) {
             System.out.print((char)(c[i]));

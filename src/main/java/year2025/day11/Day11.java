@@ -5,19 +5,18 @@ import main.ReadLines;
 import java.util.*;
 
 public class Day11 {
-    // part2 98318535 too low
     List<String> fileLines;
-    int inputFileIndex = 2;
     ArrayList<Device> devices = new ArrayList<>();
     int part1Result = 0;
     int part2Result = 0;
     int dacReached = 0;
     int highestStepDec = 0;
 
-    public void readData() {
+    private final ReadLines reader = new ReadLines(2025, 10);
+    int inputNumber = 2; // use 1 for mock data, 2 for real data
+    private void readData(){
         // READ INPUT
-        ReadLines reader = new ReadLines();
-        fileLines = reader.readFile(inputFileIndex);
+        fileLines = reader.readFile(inputNumber);
     }
 
     public void processData(){

@@ -7,9 +7,7 @@ import java.util.*;
 public class Day10 {
 
     List<String> fileLines;
-    int inputFileIndex = 2;
     ArrayList<Machine> machines = new ArrayList<>();
-
     int[] tempSolution;
     long tempSolutionSum = Long.MAX_VALUE;
     int finalSolution = 0;
@@ -21,10 +19,11 @@ public class Day10 {
     int part2cumulative = 0;
     int bestSolutionForMachine = Integer.MAX_VALUE;
 
-    public void readData() {
+    private final ReadLines reader = new ReadLines(2025, 10);
+    int inputNumber = 2; // use 1 for mock data, 2 for real data
+    private void readData(){
         // READ INPUT
-        ReadLines reader = new ReadLines();
-        fileLines = reader.readFile(inputFileIndex);
+        fileLines = reader.readFile(inputNumber);
     }
 
     public void processFile(){

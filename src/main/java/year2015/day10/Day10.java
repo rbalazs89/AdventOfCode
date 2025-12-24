@@ -1,22 +1,19 @@
 package year2015.day10;
 
 import main.ReadLines;
-
 import java.util.List;
 
 public class Day10 {
+    private final ReadLines reader = new ReadLines(2015, 10, 2);
+    private List<String> fileLines;
 
-    List<String> fileLines;
-
-    public void readData(){
-        // READ INPUT
-        ReadLines reader = new ReadLines();
-        fileLines = reader.readFile(2);
+    private void readData(){
+        fileLines = reader.readFile();
     }
 
     public void part1(){
         readData();
-        String input = fileLines.get(0);
+        String input = fileLines.getFirst();
         String processedString = "";
         char current = ' ';
 
@@ -42,9 +39,7 @@ public class Day10 {
                 if(input.isEmpty() || counter == 0){
                     break;
                 }
-
             }
-
             input = processedString;
             processedString = "";
         }
@@ -54,7 +49,7 @@ public class Day10 {
     public void part2() {
         // same as part1
         readData();
-        String input = fileLines.get(0);
+        String input = fileLines.getFirst();
 
         for (int j = 0; j < 50; j++) {
             StringBuilder sb = new StringBuilder(input.length() * 2);
@@ -74,8 +69,6 @@ public class Day10 {
             }
             input = sb.toString();
         }
-        //System.out.println(input);
-
         System.out.println(input.length());
     }
 }

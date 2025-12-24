@@ -7,26 +7,26 @@ import java.util.HashSet;
 import java.util.List;
 
 public class Day9 {
-    List<String> fileLines;
-    ArrayList<Vertex> nodes = new ArrayList<>();
-    ArrayList<Edge> edges = new ArrayList<>();
-    int edgesNumberPerCity;
-    int highestResult = 0;
+    private final ReadLines reader = new ReadLines(2015, 9, 2);
+    private List<String> fileLines = new ArrayList<>();
+    private final ArrayList<Vertex> nodes = new ArrayList<>();
+    private final ArrayList<Edge> edges = new ArrayList<>();
+    private int edgesNumberPerCity;
+    private int highestResult = 0;
 
-    public void readData(){
-        // READ INPUT
-        ReadLines reader = new ReadLines();
-        fileLines = reader.readFile(2);
+    private void readData(){
+        fileLines = reader.readFile();
     }
 
-    public void clearData(){
+    private void clearData(){
         fileLines.clear();
         nodes.clear();
         edges.clear();
         edgesNumberPerCity = 0;
     }
 
-    public void processData(){
+    private void processData(){
+        clearData();
         readData();
 
         HashSet<String> duplicate = new HashSet<>();
@@ -70,17 +70,16 @@ public class Day9 {
         }
     }
 
-    Vertex findVertexByName(String city){
+    private Vertex findVertexByName(String city){
         for (int i = 0; i < nodes.size(); i++) {
             if(nodes.get(i).name.equals(city)){
                 return nodes.get(i);
             }
         }
-        System.out.println("problem");
-        return null;
+        throw new IllegalStateException("Vertex not found with name" + city);
     }
 
-    public void resetVisited(){
+    private void resetVisited(){
         for (int i = 0; i < nodes.size(); i++) {
             nodes.get(i).visited = false;
         }
@@ -91,6 +90,7 @@ public class Day9 {
     }
 
     public void part1(){
+        clearData();
         processData();
 
         int[] results = new int [edgesNumberPerCity + 1];
@@ -136,7 +136,6 @@ public class Day9 {
     }
 
     public void part2(){
-
         clearData();
         processData();
 
@@ -144,10 +143,9 @@ public class Day9 {
         generatePermutations(nodes, new ArrayList<>(), used);
 
         System.out.println(highestResult);
-
     }
 
-    void generatePermutations(ArrayList<Vertex> cities, ArrayList<Vertex> current, boolean[] used) {
+    private void generatePermutations(ArrayList<Vertex> cities, ArrayList<Vertex> current, boolean[] used) {
         if (current.size() == cities.size()) {
             processPath(current);
             return;
@@ -167,7 +165,7 @@ public class Day9 {
         }
     }
 
-    void processPath(ArrayList<Vertex> onePath){
+    private void processPath(ArrayList<Vertex> onePath){
         int onePathDistance = 0;
         for (int i = 0; i < onePath.size() - 1; i++) {
             onePathDistance += getValueBetweenTwoCity(onePath.get(i), onePath.get(i + 1));
@@ -178,60 +176,12 @@ public class Day9 {
         }
     }
 
-    int getValueBetweenTwoCity(Vertex city1, Vertex city2){
+    private int getValueBetweenTwoCity(Vertex city1, Vertex city2){
         for (int i = 0; i < city1.edges.length; i++) {
             if(city1.edges[i].vertex1.name.equals(city2.name) || city1.edges[i].vertex2.name.equals(city2.name)){
                 return city1.edges[i].value;
             }
         }
         return 0;
-    }
-
-
-    public void part2didntwork(){
-        clearData();
-        processData();
-
-        int[] results = new int [edgesNumberPerCity + 1];
-        //select starting city
-        for (int i = 0; i < results.length; i++) {
-            resetVisited();
-            Vertex currentCity = nodes.get(i);
-
-            //select destination (nodes - 1 times)
-            for (int m = 0; m < results.length - 1; m++) {
-                int highest = 0;
-                int highestIndex = -1;
-                for (int j = 0; j < currentCity.edges.length; j++) {
-                    if(currentCity.edges[j].value > highest  && !currentCity.edges[j].visited){
-                        highest = currentCity.edges[j].value;
-                        highestIndex = j;
-                    }
-                }
-                // set all edges visited so it doesnt visit the same city again
-                for (int j = 0; j < currentCity.edges.length; j++) {
-                    currentCity.edges[j].visited = true;
-                }
-
-                // add value to result table
-                results[i] = results[i] + currentCity.edges[highestIndex].value;
-
-                // set the new current city
-                if(currentCity.edges[highestIndex].vertex1.name.equals(currentCity.name)){
-                    currentCity = currentCity.edges[highestIndex].vertex2;
-                } else {
-                    currentCity = currentCity.edges[highestIndex].vertex1;
-                }
-            }
-        }
-
-        // find highest overall
-        int part2Result = 0;
-        for (int i = 0; i < results.length; i++) {
-            if(results[i] > part2Result){
-                part2Result = results[i];
-            }
-        }
-        System.out.println(part2Result);
     }
 }

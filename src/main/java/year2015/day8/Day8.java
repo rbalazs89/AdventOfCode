@@ -7,13 +7,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Day8 {
+    private final ReadLines reader = new ReadLines(2015, 8, 2);
+    private List<String> fileLines;
 
-    List<String> fileLines;
-
-    public void readData(){
-        // READ INPUT
-        ReadLines reader = new ReadLines();
-        fileLines = reader.readFile(2);
+    private void readData(){
+        fileLines = reader.readFile();
     }
 
     public void part1(){
