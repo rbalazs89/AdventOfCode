@@ -7,20 +7,18 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Day13 {
+    private final ReadLines reader = new ReadLines(2015, 13, 2);
+    private List<String> fileLines;
+    private Vertex[] table;
+    private int people;
+    private int highestScore = 0;
 
-    List<String> fileLines;
-    int inputFileIndex = 2;
-    Vertex[] table;
-    int people;
-    int highestScore = 0;
-
-    public void readData(){
-        // READ INPUT
-        ReadLines reader = new ReadLines();
-        fileLines = reader.readFile(inputFileIndex);
+    private void readData(){
+        fileLines = reader.readFile();
     }
 
-    public void getPPL(){
+    // sets people variable
+    private void getPPL(){
         String firstName = fileLines.get(0).split(" ")[0];
         for (int i = 0; i < fileLines.size(); i++) {
             if(!fileLines.get(i).split(" ")[0].equals(firstName)){
@@ -30,7 +28,7 @@ public class Day13 {
         }
     }
 
-    public void processFile(){
+    private void processFile(){
         table = new Vertex[people];
 
         for (int i = 0; i < fileLines.size(); i++) {
@@ -73,7 +71,7 @@ public class Day13 {
         }
     }
 
-    void insertEdge(Vertex v, Edge e){
+    private void insertEdge(Vertex v, Edge e){
         for (int i = 0; i < v.edges.length; i++) {
             if(v.edges[i] == null){
                 v.edges[i] = e;
@@ -82,7 +80,7 @@ public class Day13 {
         }
     }
 
-    Vertex findByName(String name){
+    private Vertex findByName(String name){
         for (int i = 0; i < table.length; i++) {
             if(table[i] != null){
                 if(table[i].name.equals(name)){
@@ -93,7 +91,7 @@ public class Day13 {
         return null;
     }
 
-    void insertName(Vertex v){
+    private void insertName(Vertex v){
         for (int i = 0; i < table.length; i++) {
             if(table[i] == null){
                 table[i] = v;
@@ -116,6 +114,8 @@ public class Day13 {
     public void part2(){
         highestScore = 0;
         readData();
+        getPPL();
+        processFile();
 
         String firstName = fileLines.get(0).split(" ")[0];
         for (int i = 0; i < fileLines.size(); i++) {
@@ -124,7 +124,7 @@ public class Day13 {
                 break;
             }
         }
-        processFile();
+
         addBalazs();
 
         ArrayList<Vertex> nodes = new ArrayList<>(Arrays.asList(table));
@@ -133,7 +133,7 @@ public class Day13 {
         System.out.println(highestScore);
     }
 
-    void generatePermutations(ArrayList<Vertex> guests, ArrayList<Vertex> current, boolean[] used) {
+    private void generatePermutations(ArrayList<Vertex> guests, ArrayList<Vertex> current, boolean[] used) {
         if (current.size() == guests.size()) {
             processSeating(current);
             return;
@@ -153,7 +153,7 @@ public class Day13 {
         }
     }
 
-    void processSeating(ArrayList<Vertex> seating){
+    private void processSeating(ArrayList<Vertex> seating){
         int score = 0;
         for (int i = 0; i < seating.size(); i++) {
             Vertex current = seating.get(i);
@@ -182,7 +182,7 @@ public class Day13 {
         highestScore = Math.max(highestScore, score);
     }
 
-    public void addBalazs(){
+    private void addBalazs(){
         Vertex Balazs = new Vertex();
         Edge[] edges = new Edge[people - 1];
         Balazs.name = "Balazs";

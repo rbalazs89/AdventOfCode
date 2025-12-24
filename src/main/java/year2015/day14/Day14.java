@@ -6,14 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Day14 {
-    List<String> fileLines;
-    int inputFileIndex = 2;
-    ArrayList<Reindeer> horses = new ArrayList<>();
+    private final ReadLines reader = new ReadLines(2015, 14, 2);
+    private List<String> fileLines;
+    private final ArrayList<Reindeer> horses = new ArrayList<>();
+    private static final int SECONDS = 2503; // given by task description
 
-    public void readData(){
-        // READ INPUT
-        ReadLines reader = new ReadLines();
-        fileLines = reader.readFile(inputFileIndex);
+    private void readData(){
+        fileLines = reader.readFile();
     }
 
     public void processData(){
@@ -34,12 +33,11 @@ public class Day14 {
     public void part1(){
         int highestDistance = 0;
         processData();
-        int seconds = 2503;
         for (int i = 0; i < horses.size(); i++) {
             Reindeer current = horses.get(i);
             int cycle = current.flyTime + current.restTime;
-            int remainder = seconds % cycle;
-            int completedCycles = seconds / cycle;
+            int remainder = SECONDS % cycle;
+            int completedCycles = SECONDS / cycle;
             current.distance = completedCycles * current.velocity * current.flyTime;
             if(remainder >= current.flyTime){
                 current.distance += current.flyTime * current.velocity;
@@ -48,13 +46,13 @@ public class Day14 {
             }
             highestDistance = Math.max(highestDistance, current.distance);
         }
-        System.out.println("winner distance: " + highestDistance);
+        System.out.println(highestDistance);
     }
 
     public void part2(){
         processData();
         int counter = 0;
-        while(counter < 2503){
+        while(counter < SECONDS){
             counter ++;
             for (int i = 0; i < horses.size(); i++) {
                 Reindeer current = horses.get(i);
@@ -94,9 +92,8 @@ public class Day14 {
         int hiScore = 0;
         for (int i = 0; i < horses.size(); i++) {
             hiScore = Math.max(hiScore, horses.get(i).score);
-            //System.out.println(horses.get(i).name + ": " + horses.get(i).score + " distance: " + horses.get(i).distance);
         }
 
-        System.out.println("part 2 score: " + hiScore);
+        System.out.println(hiScore);
     }
 }
