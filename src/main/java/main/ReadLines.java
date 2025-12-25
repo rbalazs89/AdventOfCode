@@ -107,10 +107,7 @@ public class ReadLines {
         }
 
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(is))) {
-            return reader.lines()
-                    .map(String::strip)
-                    .filter(line -> !line.isEmpty())
-                    .collect(Collectors.toList());
+            return reader.lines().collect(Collectors.toList());
         } catch (Exception e) {
             System.err.println("Error reading stream: " + e.getMessage());
             return Collections.emptyList();
