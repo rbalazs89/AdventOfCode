@@ -5,9 +5,9 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 class Program {
-    ArrayList<Instruction> instructions = new ArrayList<>();
-    ArrayList<Register> registers = new ArrayList<>();
-    boolean isWaiting = false;
+    ArrayList<Instruction> instructions;
+    ArrayList<Register> registers;
+    boolean isWaiting;
     Queue<Long> receivedQueue = new LinkedList<>();
     int sentCounter = 0;
     int IDNumber;

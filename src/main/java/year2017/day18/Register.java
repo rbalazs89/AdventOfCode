@@ -13,10 +13,6 @@ class Register {
         return name;
     }
 
-    void setName(String name) {
-        this.name = name;
-    }
-
     Long getValue() {
         if(value == null){
             System.out.println("???? " + name);
