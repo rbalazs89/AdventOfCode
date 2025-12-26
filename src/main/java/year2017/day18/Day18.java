@@ -316,6 +316,6 @@ public class Day18 {
                 return current;
             }
         }
-        throw new IllegalStateException("Register with name: " + name + " not recignozed.");
+        throw new IllegalStateException("Register with name: " + name + " not recognized.");
     }
 }

@@ -54,7 +54,7 @@ public class ReadLines {
 
         // Fallback logic same as before...
         if (inputNumber == 2) {
-            System.out.println("Falling back to input1.txt");
+            System.out.println("Falling back to input1.txt.txt");
             return readFile(1);
         }
 
@@ -92,7 +92,7 @@ public class ReadLines {
 
         // Fallback logic same as before...
         if (inputNumber == 2) {
-            System.out.println("Falling back to input1.txt");
+            System.out.println("Falling back to input1.txt.txt");
             return readFile(1);
         }
 

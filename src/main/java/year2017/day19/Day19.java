@@ -237,8 +237,9 @@ public class Day19 {
     }
 
     public void part2(){
-
+        // algorithm identical to part 1, nothing to do here
     }
+
     /**
      * DEBUG METHOD
      * prints the grid

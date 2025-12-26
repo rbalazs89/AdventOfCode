@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 // vertex representing programs
-public class Program {
+class Program {
 
     private final int value;
     ArrayList<Program> connected = new ArrayList<>();

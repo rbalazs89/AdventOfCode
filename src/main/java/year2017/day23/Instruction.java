@@ -1,4 +1,4 @@
-package year2017.day18;
+package year2017.day23;
 
 class Instruction {
 
@@ -8,12 +8,9 @@ class Instruction {
     final Register regAttributeTwo;
     final String type;
     // set
-    // add
+    // sub
     // mul
-    // mod
-    // snd
-    // rcv
-    // jgz
+    // jnz
 
     Instruction(Long longAttributeOne, Register regAttributeOne, Long longAttributeTwo, Register regAttributeTwo, String type) {
         this.longAttributeOne = longAttributeOne;

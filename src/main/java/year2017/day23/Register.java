@@ -1,4 +1,4 @@
-package year2017.day18;
+package year2017.day23;
 
 class Register {
     private final String name;
@@ -13,8 +13,8 @@ class Register {
         return name;
     }
 
-    Long getValue() {
-        return value;
+    public Long getValueOrZero() {
+        return value != null ? value : 0L;
     }
 
     void setValue(Long value) {
