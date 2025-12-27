@@ -74,7 +74,7 @@ public class ReadLines {
         InputStream is = getClass().getResourceAsStream(resourcePath);
 
         if (is != null) {
-            //System.out.println("SUCCESS: Found " + resourcePath);
+
         } else {
             System.out.println("FAILED: getResourceAsStream returned null for " + resourcePath);
             // List all resources at parent to debug

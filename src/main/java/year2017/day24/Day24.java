@@ -7,7 +7,7 @@ import java.util.*;
 public class Day24 {
     private final ReadLines reader = new ReadLines(2017, 24, 2);
 
-    private ArrayList<Component> getComponents(){
+    private List<Component> getComponents(){
         List<String> fileLines = reader.readFile();
         ArrayList<Component> components = new ArrayList<>();
 
@@ -19,63 +19,55 @@ public class Day24 {
     }
 
     public void part1(){
-        // setup:
-        ArrayList<Component> components = getComponents();
-        Graph firstGraph = new Graph(new ArrayList<>(), new HashSet<>(), 0, 0);
-        Queue<Graph> queue = new LinkedList<>();
-        queue.add(firstGraph);
-
-        // BFS style search:
-        int highestBridgeStrength = 0;
-        while (!queue.isEmpty()){
-            Graph currentGraph = queue.poll();
-
-            // keep track of the strongest bridge:
-            highestBridgeStrength = Math.max(highestBridgeStrength, currentGraph.getCurrentStrength());
-
-            for (int i = 0; i < components.size(); i++) {
-                Graph nextGraph = currentGraph.getPotentialNewGraph(components.get(i));
-                if(nextGraph != null) {
-                    queue.add(nextGraph);
-                }
-            }
-        }
-        System.out.println(highestBridgeStrength);
+        List<Component> components = getComponents();
+        System.out.println(searchStrongestBridge(components));
     }
 
-    //private int(BFS)
-
     public void part2(){
-        // setup:
-        ArrayList<Component> components = getComponents();
-        Graph firstGraph = new Graph(new ArrayList<>(), new HashSet<>(), 0, 0);
-        Queue<Graph> queue = new LinkedList<>();
-        queue.add(firstGraph);
+        List<Component> components = getComponents();
+        System.out.println(searchLongestBridge(components));
+    }
 
-        // BFS style search:
+    private int searchAllBridges(boolean mustBeLongest, List<Component> components){
+        // prepare queue:
+        BridgeConfiguration firstBridgeConfiguration = new BridgeConfiguration(0, new HashSet<>(), 0, 0);
+        Queue<BridgeConfiguration> queue = new LinkedList<>();
+        queue.add(firstBridgeConfiguration);
+
         int highestBridgeStrength = 0;
         int longestBridge = 0;
-
         while (!queue.isEmpty()){
-            Graph currentGraph = queue.poll();
+            BridgeConfiguration currentBridgeConfiguration = queue.poll();
 
-            // find thes trongest only if length is the greatest
-            if(longestBridge <= currentGraph.getBridgeLength()){
-                if(longestBridge == currentGraph.getBridgeLength()){
-                    highestBridgeStrength = Math.max(highestBridgeStrength, currentGraph.getCurrentStrength());
-                } else {
-                    highestBridgeStrength = currentGraph.getCurrentStrength();
+            // keep track of the strongest bridge:
+            if(mustBeLongest){
+                if(longestBridge <= currentBridgeConfiguration.getNumberOfComponent()){
+                    if(longestBridge == currentBridgeConfiguration.getNumberOfComponent()){
+                        highestBridgeStrength = Math.max(highestBridgeStrength, currentBridgeConfiguration.getCurrentStrength());
+                    } else {
+                        highestBridgeStrength = currentBridgeConfiguration.getCurrentStrength();
+                    }
+                    longestBridge = Math.max(currentBridgeConfiguration.getNumberOfComponent(), longestBridge);
                 }
-                longestBridge = Math.max(currentGraph.getBridgeLength(), longestBridge);
+            } else {
+                highestBridgeStrength = Math.max(highestBridgeStrength, currentBridgeConfiguration.getCurrentStrength());
             }
 
-            for (int i = 0; i < components.size(); i++) {
-                Graph nextGraph = currentGraph.getPotentialNewGraph(components.get(i));
-                if(nextGraph != null) {
-                    queue.add(nextGraph);
+
+            for (Component c : components) {
+                BridgeConfiguration nextBridgeConfiguration = currentBridgeConfiguration.tryExtend(c);
+                if(nextBridgeConfiguration != null) {
+                    queue.add(nextBridgeConfiguration);
                 }
             }
         }
-        System.out.println(highestBridgeStrength);
+        return highestBridgeStrength;
+    }
+    private int searchStrongestBridge(List<Component> components) {
+        return searchAllBridges(false, components);
+    }
+
+    private int searchLongestBridge(List<Component> components) {
+        return searchAllBridges(true, components);
     }
 }

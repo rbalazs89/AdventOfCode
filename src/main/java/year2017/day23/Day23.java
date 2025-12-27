@@ -68,29 +68,42 @@ public class Day23 {
     }
 
     public void part2(){
-        System.out.println(getNumber());
-        Program program = prepareInstructionsAndRegisters();
-        program.getRegisterByName("a").setValue(1L);
 
-        for (int index = 0; index < program.instructions.size();) {
-            //index = index + applyInstruction(program, index);
-        }
-        System.out.println(program.getRegisterByName("h").getValueOrZero());
+        System.out.println(getNumber());
     }
 
     private int getNumber (){
         int counter = 0;
-        final int original = 99 * 100 + 100000;
+        // set register b 99
+        // multi register b 100
+        // remove 100000
+        int fromRegisters = 99 * 100 + 100000;
 
         for (int n = 0; n <= 1000; ++n) {
-            int number = original + 17 * n;
-            if (!BigInteger.valueOf(number).isProbablePrime(100000))
-            {
+            Long number = fromRegisters + 17L * n; // value always detracted from register b;
+            if (!isPrime(number)){
                 counter++;
             }
         }
         return counter;
     }
+
+    private static boolean isPrime(long n) {
+        if (n <= 1) return false;
+        if (n <= 3) return true;
+
+        if (n % 2 == 0 || n % 3 == 0) {
+            return false;
+        }
+
+        for (int i = 5; (long) i * i <= n; i += 6) {
+            if (n % i == 0 || n % (i + 2) == 0)
+                return false;
+        }
+
+        return true;
+    }
+
 
     private int applyInstruction(Program program, int index){
         Instruction instruction = program.instructions.get(index);

@@ -30,12 +30,4 @@ public class Program {
         }
         throw new IllegalStateException("Register with name: " + name + " not recignized.");
     }
-
-    void setCurrentIndex(int currentIndex) {
-        this.currentIndex = currentIndex;
-    }
-
-    int getCurrentIndex() {
-        return currentIndex;
-    }
 }

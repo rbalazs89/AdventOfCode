@@ -150,7 +150,6 @@ public class Day20 {
                 }
             }
         }
-
         System.out.println(snowBalls.size());
     }
 }
