@@ -13,9 +13,8 @@ public class Day1 {
         List<String> input = reader.readFile();
         List<Integer> numbers = new ArrayList<>();
         for (String line : input) {
-            numbers.add(Integer.valueOf(line));
+            numbers.add(Integer.parseInt(line));
         }
-
         return numbers;
     }
 
@@ -34,23 +33,21 @@ public class Day1 {
         List<Integer> numbers = processInput();
 
         // prepare while loop:
-        Set<Integer> detectDuplicates = new HashSet<>();
+        Set<Integer> seenFrequencies = new HashSet<>();
         int sum = 0;
-        detectDuplicates.add(sum);
-        boolean duplicateFound = false;
+        seenFrequencies.add(sum);
 
-        // run until duplicate is found
-        while(!duplicateFound){
-            for (int number : numbers) {
-                sum += number;
+        // guaranteed to terminate because the frequency will eventually repeat
+        while(true){
+            for (int delta : numbers) {
+                sum += delta;
 
                 // first frequency reached twice
-                if(!detectDuplicates.add(sum)){
-                    duplicateFound = true;
-                    break;
+                if(!seenFrequencies.add(sum)){
+                    System.out.println(sum);
+                    return;
                 }
             }
         }
-        System.out.println(sum);
     }
 }
