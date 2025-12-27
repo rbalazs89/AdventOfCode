@@ -81,15 +81,15 @@ This repository contains my solutions to the advent of code puzzles.
 | Day 14 | ![Done](https://img.shields.io/badge/Done-brightgreen)                  | ![Done](https://img.shields.io/badge/Done-brightgreen)                                     |
 | Day 15 | ![Done](https://img.shields.io/badge/Done-brightgreen)                  | ![Done](https://img.shields.io/badge/Done-brightgreen)                                     |
 | Day 16 | ![Done](https://img.shields.io/badge/Done-brightgreen)                  | ![Done](https://img.shields.io/badge/Done-brightgreen)                                     |
-| Day 17 | ![WIP](https://img.shields.io/badge/WIP-lightgrey)                      | ![WIP](https://img.shields.io/badge/WIP-lightgrey)                                                  |
-| Day 18 | ![WIP](https://img.shields.io/badge/WIP-lightgrey)                      | ![WIP](https://img.shields.io/badge/WIP-lightgrey)                                                  |
-| Day 19 | ![WIP](https://img.shields.io/badge/WIP-lightgrey)                      | ![WIP](https://img.shields.io/badge/WIP-lightgrey)                                                  |
-| Day 20 | ![WIP](https://img.shields.io/badge/WIP-lightgrey)                      | ![WIP](https://img.shields.io/badge/WIP-lightgrey)                                                  |
-| Day 21 | ![WIP](https://img.shields.io/badge/WIP-lightgrey)                      | ![WIP](https://img.shields.io/badge/WIP-lightgrey)                                                  |
-| Day 22 | ![WIP](https://img.shields.io/badge/WIP-lightgrey)                      | ![WIP](https://img.shields.io/badge/WIP-lightgrey)                                                  |
-| Day 23 | ![WIP](https://img.shields.io/badge/WIP-lightgrey)                      | ![WIP](https://img.shields.io/badge/WIP-lightgrey)                                                  |
-| Day 24 | ![WIP](https://img.shields.io/badge/WIP-lightgrey)                      | ![WIP](https://img.shields.io/badge/WIP-lightgrey)                                                  |
-| Day 25 | ![WIP](https://img.shields.io/badge/WIP-lightgrey)                      | –                                                                                          |
+| Day 17 | ![Done](https://img.shields.io/badge/Done-brightgreen)                  | ![Done](https://img.shields.io/badge/Done-brightgreen)                                               |
+| Day 18 | ![Done](https://img.shields.io/badge/Done-brightgreen)                      | ![Done](https://img.shields.io/badge/Done-brightgreen)                                                  |
+| Day 19 | ![Done](https://img.shields.io/badge/Done-brightgreen)                      | ![Done](https://img.shields.io/badge/Done-brightgreen)                                                  |
+| Day 20 | ![Done](https://img.shields.io/badge/Done-brightgreen)                      | ![Done](https://img.shields.io/badge/Done-brightgreen)                                                  |
+| Day 21 | ![Done](https://img.shields.io/badge/Done-brightgreen)                      | ![Done](https://img.shields.io/badge/Done-brightgreen)                                                  |
+| Day 22 | ![Done](https://img.shields.io/badge/Done-brightgreen)                      | ![Done](https://img.shields.io/badge/Done-brightgreen)                                                  |
+| Day 23 | ![Done](https://img.shields.io/badge/Done-brightgreen)                      | ![Done](https://img.shields.io/badge/Done-brightgreen)                                                  |
+| Day 24 | ![Done](https://img.shields.io/badge/Done-brightgreen)                      | ![Done](https://img.shields.io/badge/Done-brightgreen)                                                  |
+| Day 25 | ![Done](https://img.shields.io/badge/Done-brightgreen)                      | –                                                                                          |
 
 
 
