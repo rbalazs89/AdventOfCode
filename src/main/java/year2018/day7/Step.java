@@ -6,8 +6,8 @@ import java.util.*;
 // Step class represents a Vertex here
 class Step implements Comparable<Step>{
     private final char id;
-    private ArrayList<Step> incoming = new ArrayList<>();
-    private ArrayList<Step> outgoing = new ArrayList<>();
+    private final ArrayList<Step> incoming = new ArrayList<>();
+    private final ArrayList<Step> outgoing = new ArrayList<>();
     private int workTime;
     static final int BASE_WORK_TIME = 61; // specified by task description
 

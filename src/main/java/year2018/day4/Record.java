@@ -10,7 +10,7 @@ class Record {
     static final String GUARD_MARKER = "Guard";
     static final Pattern GUARD_PATTERN = Pattern.compile("#(\\d+)");
 
-    private TimeStamp timeStamp;
+    private final TimeStamp timeStamp;
     private final String type;
     private final Guard guard;
 

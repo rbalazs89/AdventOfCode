@@ -14,8 +14,8 @@ import static year2018.day4.Record.MARK_WAKE_UP;
 public class Day4 {
 
     private final ReadLines reader = new ReadLines(2018, 4, 2);
-    private ArrayList<Guard> guards = new ArrayList<>();
-    private ArrayList<Record> records = new ArrayList<>();
+    private final ArrayList<Guard>  guards = new ArrayList<>();
+    private final ArrayList<Record> records = new ArrayList<>();
 
     private void prepare(){
         // prepare class variables
@@ -32,12 +32,7 @@ public class Day4 {
             records.add(new Record(line, guards));
         }
 
-        records.sort(new Comparator<Record>() {
-            @Override
-            public int compare(Record o1, Record o2) {
-                return o1.getTimeStamp().compareTo(o2.getTimeStamp());
-            }
-        });
+        records.sort(Comparator.comparing(Record::getTimeStamp));
 
         // must be called after ordering
         for (int i = 0; i < records.size(); i++) {
@@ -61,7 +56,7 @@ public class Day4 {
 
         Guard currentGuard = records.getFirst().getGuard();
         int intervalStart = 0;
-        int intervalEnd = 0;
+        int intervalEnd;
         boolean isSleeping = false;
 
         for (int i = 0; i < records.size(); i++) {
@@ -116,6 +111,7 @@ public class Day4 {
             }
         }
 
+        assert worstGuard != null;
         System.out.println(worstGuard.getId() * worstSingleMinuteIndex);
 
     }
@@ -131,7 +127,7 @@ public class Day4 {
                 worstGuard = guard;
             }
         }
-
+        assert worstGuard != null;
         return worstGuard.getWorstSleepingMinuteIndex() * worstGuard.getId();
     }
 }

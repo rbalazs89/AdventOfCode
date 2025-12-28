@@ -2,7 +2,6 @@ package year2018.day10;
 
 import main.ReadLines;
 
-import javax.swing.plaf.IconUIResource;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -110,6 +109,7 @@ public class Day10 {
                     Particle p = particles.get(i);
                     if(p.getPy() - minY == y && p.getPx() - minX == x){
                         textPattern[y][x] = '#';
+                        break;
                     }
                 }
             }

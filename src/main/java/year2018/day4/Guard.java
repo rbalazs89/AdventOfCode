@@ -1,7 +1,7 @@
 package year2018.day4;
 
 class Guard {
-    private int id;
+    private final int id;
     int[] sumTimeSleepingTime = new int[60];
 
     Guard (int id){
@@ -20,8 +20,8 @@ class Guard {
 
     int getSumSleepingSumTime(){
         int sum = 0;
-        for (int i = 0; i < sumTimeSleepingTime.length; i++) {
-            sum += sumTimeSleepingTime[i];
+        for (int j : sumTimeSleepingTime) {
+            sum += j;
         }
         return sum;
     }
