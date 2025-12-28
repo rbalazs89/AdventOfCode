@@ -8,11 +8,11 @@ class Record {
     static final String MARK_SLEEP = "falls asleep";
     static final String MARK_WAKE_UP = "wakes up";
     static final String GUARD_MARKER = "Guard";
+    static final Pattern GUARD_PATTERN = Pattern.compile("#(\\d+)");
 
-    private final TimeStamp timeStamp;
+    private TimeStamp timeStamp;
     private final String type;
-    private final Guard id;
-    private static final Pattern PATTERN = Pattern.compile("\\d+#");
+    private final Guard guard;
 
     Record (String line, ArrayList<Guard> guards){
         if(line.contains(MARK_SLEEP)) type = MARK_SLEEP;
@@ -21,11 +21,18 @@ class Record {
         else throw new IllegalStateException("Record not recognized, invalid input");
 
         timeStamp = new TimeStamp(line);
-        if(type.equals(GUARD_MARKER)){
-            Matcher matcher = PATTERN.matcher(line);
-            id = matchGuard(guards, Integer.parseInt(matcher.group()));
-        } else {
-            id = null;
+
+        if (type.equals(GUARD_MARKER)) {
+            Matcher matcher = GUARD_PATTERN.matcher(line);
+            if (matcher.find()) {
+                int guardId = Integer.parseInt(matcher.group(1));
+                guard = matchGuard(guards, guardId);
+            } else {
+                throw new IllegalStateException("guard not found");
+            }
+        }
+        else {
+            guard = null;
         }
     }
 
@@ -36,5 +43,31 @@ class Record {
             }
         }
         throw new IllegalStateException("Record not recognized, invalid input");
+    }
+
+    TimeStamp getTimeStamp() {
+        return timeStamp;
+    }
+
+    Guard getGuard() {
+        return guard;
+    }
+
+    String getType(){
+        return type;
+    }
+
+    @Override
+    public String toString(){
+        String timeStampString = timeStamp.toString();
+        String addedString;
+        if(type.equals(MARK_SLEEP)){
+            addedString = " Guard falls asleep.";
+        } else if (type.equals(MARK_WAKE_UP)){
+            addedString = " Guard wakes up.";
+        } else {
+            addedString = " Guard #" + guard.getId() + " begins shift.";
+        }
+        return timeStampString + addedString;
     }
 }

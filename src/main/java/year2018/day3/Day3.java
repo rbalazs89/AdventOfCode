@@ -14,7 +14,7 @@ public class Day3 {
             Pattern.compile("#(\\d+) @ (\\d+),(\\d+): (\\d+)x(\\d+)");
 
     private List<Fabric> getFabricList(){
-        // there are 1265 lines and fabric dimensions are below 1000
+        // there are 1265 lines and fabric dimensions are below 1001
         List<String> lines = reader.readFile();
 
         List<Fabric> fabrics = new ArrayList<>(lines.size()); // pre-size
