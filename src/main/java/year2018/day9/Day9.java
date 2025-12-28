@@ -6,7 +6,6 @@ public class Day9 {
     private final ReadLines reader = new ReadLines(2018, 9, 2);
 
 
-
     public void part1(){
 
     }

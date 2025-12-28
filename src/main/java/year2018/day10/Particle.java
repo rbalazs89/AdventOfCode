@@ -5,7 +5,6 @@ public class Particle {
     private final int vy;
     private int px;
     private int py;
-    private int adjacentParticles;
 
     Particle(int px, int py, int vx, int vy){
         this.px = px;
@@ -28,31 +27,7 @@ public class Particle {
         return py;
     }
 
-    void setPy(int py) {
-        this.py = py;
-    }
-
     int getPx() {
         return px;
-    }
-
-    void setPx(int px) {
-        this.px = px;
-    }
-
-    int getVy() {
-        return vy;
-    }
-
-    int getVx() {
-        return vx;
-    }
-
-    int getAdjacentParticles() {
-        return adjacentParticles;
-    }
-
-    void setAdjacentParticles(int adjacentParticles) {
-        this.adjacentParticles = adjacentParticles;
     }
 }
