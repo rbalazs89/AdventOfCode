@@ -178,7 +178,4 @@ abstract class Fighter{
             this.y = y;
         }
     }
-    int getDamage(){
-        return damage;
-    }
 }
