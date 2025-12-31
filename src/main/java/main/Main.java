@@ -2,7 +2,7 @@ package main;
 
 public class Main {
 
-    private static final int YEAR = 2018;
+    private static final int YEAR = 2024;
     private static final int DAY = 9;
 
     public static void main(String[] args) throws Exception {

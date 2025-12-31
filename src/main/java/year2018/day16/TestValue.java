@@ -1,11 +1,13 @@
 package year2018.day16;
 
-import jdk.incubator.vector.VectorOperators;
+import java.util.ArrayList;
 
 class TestValue {
     private final int[] before;
     private final int[] instruction;
     private final int[] after;
+    private final ArrayList<Integer> possibleNumbers = new ArrayList<>();
+    private final ArrayList<Opcode> possibleOpcodes = new ArrayList<>();
 
     TestValue(int[] before, int[] instruction, int[] after){
         this.before = before;
@@ -13,15 +15,25 @@ class TestValue {
         this.after = after;
     }
 
-    public int[] getBefore() {
+    int[] getBefore() {
         return before;
     }
 
-    public int[] getInstruction() {
+    int[] getInstruction() {
         return instruction;
     }
 
-    public int[] getAfter() {
+    int[] getAfter() {
         return after;
     }
+
+    void addPossibleNumber(int n){
+        possibleNumbers.add(n);
+    }
+
+    void addPossibleOpcode(Opcode opcode){
+        possibleOpcodes.add(opcode);
+    }
+
+
 }

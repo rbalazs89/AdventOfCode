@@ -21,5 +21,5 @@ build/
 *.log
 
 ### Advent of Code input files ###
-# Ignore any file starting with "input2.txt" input1.txt can stay:
+# Ignore any file starting with "input2.txt.txt" input1.txt can stay:
 input2.txt

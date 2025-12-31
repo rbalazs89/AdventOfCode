@@ -9,8 +9,8 @@ import java.util.regex.Pattern;
 
 public class Day9 {
     private final ReadLines reader = new ReadLines(2018, 9, 2);
-    private static final int M = 23; // multiples of 23 are kept
-    private static final int S = 7; // steps at multiples of 23
+    private static final int M = 23; // multiples of 23 are kept, specified by task description
+    private static final int S = 7; // steps backwards, specified by task description
 
     private int[] getInput(){ // number of player, and max value
         String line = reader.readFile().getFirst();
@@ -122,6 +122,7 @@ public class Day9 {
                 currentMarble = afterRemovedMarble;
 
             } else {
+                // add next step in the middle of the chain
                 Marble futureStepPrevious = currentMarble.next;
                 Marble futureStepNext = currentMarble.next.next;
 

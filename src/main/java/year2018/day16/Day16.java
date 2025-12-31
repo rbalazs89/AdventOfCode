@@ -46,9 +46,19 @@ public class Day16 {
     public void part1(){
         prepare();
 
+        for (int i = 0; i < testValues.size(); i++) {
+            processTestValue(testValues.get(i));
+        }
     }
 
     public void part2(){
 
+    }
+
+    private void processTestValue(TestValue t){
+        // addr, addi, mulr, muli, banr, bani, borr, bori, setr, seti, gtir, gtri, gtrr, eqir, eqri, eqrr
+
+        // addr: stores into register C the result of adding register A and register B.
+        int add1 = t.getBefore()[t.getInstruction()[1]];
     }
 }
