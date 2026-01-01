@@ -2,9 +2,10 @@ package year2024.day9;
 
 import main.ReadLines;
 
+import java.util.ArrayList;
+
 public class Day9 {
     private final ReadLines reader = new ReadLines(2024, 9, 1);
-    //private static String input;
     private static int[] blocks;
 
     private void processInput(){
@@ -151,7 +152,8 @@ public class Day9 {
 
         printResult();
     }
-    public static void printResult(){
+
+    private static void printResult(){
         Long result = 0L;
         for (int i = 0; i < blocks.length; i++) {
             if(blocks[i] != -1){
