@@ -6,27 +6,24 @@ import java.util.*;
 
 public class Day10 {
 
-    List<String> fileLines;
-    ArrayList<Machine> machines = new ArrayList<>();
-    int[] tempSolution;
-    long tempSolutionSum = Long.MAX_VALUE;
-    int finalSolution = 0;
+    private List<String> fileLines;
+    private final ArrayList<Machine> machines = new ArrayList<>();
+    private long tempSolutionSum = Long.MAX_VALUE;
+    private int finalSolution = 0;
 
     //part 2:
-    ArrayList<Machine> solutionsQueue = new ArrayList<>();
-    ArrayList<Machine> temporaryQueue = new ArrayList<>();
-    ArrayList<Machine> fullSolved = new ArrayList<>();
-    int part2cumulative = 0;
-    int bestSolutionForMachine = Integer.MAX_VALUE;
+    private final ArrayList<Machine> solutionsQueue = new ArrayList<>();
+    private final ArrayList<Machine> temporaryQueue = new ArrayList<>();
+    private final ArrayList<Machine> fullSolved = new ArrayList<>();
+    private int part2cumulative = 0;
 
-    private final ReadLines reader = new ReadLines(2025, 10);
-    int inputNumber = 2; // use 1 for mock data, 2 for real data
+    private final ReadLines reader = new ReadLines(2025, 10, 2);
     private void readData(){
         // READ INPUT
-        fileLines = reader.readFile(inputNumber);
+        fileLines = reader.readFile();
     }
 
-    public void processFile(){
+    private void processFile(){
         for (int i = 0; i < fileLines.size(); i++) {
             // get lights:
             String line = fileLines.get(i);
@@ -83,7 +80,6 @@ public class Day10 {
 
         for (int i = 0; i < machines.size(); i++) {
             Machine currentM = machines.get(i);
-            tempSolution = new int[machines.get(i).buttons.size()];
             tempSolutionSum = Integer.MAX_VALUE;
 
             generateCombinations(currentM, 0);
@@ -92,7 +88,7 @@ public class Day10 {
         System.out.println(finalSolution);
     }
 
-    public void generateCombinations(Machine m, int nthButtonPressed){
+    private void generateCombinations(Machine m, int nthButtonPressed){
         if (nthButtonPressed == m.buttons.size()) {
             return;
         }
@@ -108,7 +104,7 @@ public class Day10 {
         // press current button
         pressButton(m, nthButtonPressed);
 
-        // check if its a solution
+        // check if it's a solution
         checkIfSolution(m);
         generateCombinations(m, nthButtonPressed + 1);
 
@@ -116,7 +112,7 @@ public class Day10 {
         unPressButton(m, nthButtonPressed);
     }
 
-    public void checkIfSolution(Machine m){
+    private void checkIfSolution(Machine m){
         int size = m.currentLights.length;
         int points = 0;
         for (int i = 0; i < size; i++) {
@@ -131,28 +127,24 @@ public class Day10 {
             }
             if(currentSum < tempSolutionSum){
                 tempSolutionSum = currentSum;
-                for (int i = 0; i < m.buttons.size(); i++) {
-                    tempSolution[i] = m.buttons.get(i).pressed;
-                }
             }
         }
     }
 
-    public void pressButton(Machine m, int index){
+    private void pressButton(Machine m, int index){
         Button button = m.buttons.get(index);
         button.pressed ++;
         toggleLights(m, button.numbers);
     }
 
-    public void unPressButton(Machine m, int index){
+    private void unPressButton(Machine m, int index){
         Button button = m.buttons.get(index);
         button.pressed--;
         toggleLights(m, button.numbers);
     }
 
     private void toggleLights(Machine m, int[] numbers) {
-        for (int i = 0; i < numbers.length; i++) {
-            int light = numbers[i];
+        for (int light : numbers) {
             m.currentLights[light] = 1 - m.currentLights[light];  // toggle 0 or 1
         }
     }
@@ -176,20 +168,13 @@ public class Day10 {
             // go until there are solutions
             while(!solutionsQueue.isEmpty()){
                 fillQueue();
-                /*for (int i = 0; i < solutionsQueue.size(); i++) {
-                    temporaryQueue.add(solutionsQueue.get(i));
-                }
-                solutionsQueue.clear();*/
-
                 for (int i = 0; i < temporaryQueue.size(); i++) {
                     Machine m = temporaryQueue.get(i);
                     getValidCombinations(m, 0); // fills solutions queue
                 }
                 temporaryQueue.clear();
             }
-            solutionsQueue.clear();
             temporaryQueue.clear();
-
             part2cumulative += getBestFromSolvedList(q); // fullSolved arraylist
             fullSolved.clear();
         }
@@ -197,7 +182,7 @@ public class Day10 {
 
     }
 
-    public void fillQueue(){
+    private void fillQueue(){
         Set<String> set = new HashSet<>();
         for (int i = 0; i < solutionsQueue.size(); i++) {
             Machine m = solutionsQueue.get(i);
@@ -213,7 +198,7 @@ public class Day10 {
         solutionsQueue.clear();
     }
 
-    public void getValidCombinations(Machine m, int nthButtonPressed){
+    private void getValidCombinations(Machine m, int nthButtonPressed){
         int buttonsNumber = m.buttons.size();
 
         if (nthButtonPressed == buttonsNumber) {
@@ -227,7 +212,7 @@ public class Day10 {
         unPressButton2(m, nthButtonPressed);
     }
 
-    public void checkIfSolution2(Machine m){
+    private void checkIfSolution2(Machine m){
         int size = m.currentLights.length;
         int points = 0;
         for (int i = 0; i < size; i++) {
@@ -241,26 +226,25 @@ public class Day10 {
         }
     }
 
-    public void pressButton2(Machine m, int index){
+    private void pressButton2(Machine m, int index){
         Button button = m.buttons.get(index);
         button.pressed ++;
         toggleLights2(m, button.numbers);
     }
 
-    public void unPressButton2(Machine m, int index){
+    private void unPressButton2(Machine m, int index){
         Button button = m.buttons.get(index);
         button.pressed--;
         toggleLights2(m, button.numbers);
     }
 
-    public void toggleLights2(Machine m, int[] numbers) {
-        for (int i = 0; i < numbers.length; i++) {
-            int light = numbers[i];
+    private void toggleLights2(Machine m, int[] numbers) {
+        for (int light : numbers) {
             m.currentLights[light] = 1 - m.currentLights[light];  // toggle 0 or 1
         }
     }
 
-    public void copyMachineForNextStep(Machine m) {
+    private void copyMachineForNextStep(Machine m) {
         // new instance:
         Machine copied = new Machine();
 
@@ -292,7 +276,7 @@ public class Day10 {
 
         // // CHECK IF SOLVED:
         // remaining joltage:
-        copied.remainingJoltage = m.remainingJoltage.clone();;
+        copied.remainingJoltage = m.remainingJoltage.clone();
         for (int buttonIndex = 0; buttonIndex < thisStepPresses.length; buttonIndex++) {
             if (thisStepPresses[buttonIndex] == 1) {
                 Button b = m.buttons.get(buttonIndex); // use original, since structure same
@@ -314,6 +298,7 @@ public class Day10 {
                 return;
             }
         }
+
         // check if solved
         boolean fullSolution = true;
         for (int i = 0; i < copied.remainingJoltage.length; i++) {
@@ -329,39 +314,18 @@ public class Day10 {
             fullSolved.add(copied);
             return;
         }
-
         calculateLights(copied);
-
         solutionsQueue.add(copied);
     }
 
-    public void calculateLights(Machine ma){
+    private void calculateLights(Machine ma){
         ma.lights = new int[ma.joltage.length];
         for (int i = 0; i < ma.lights.length; i++) {
             ma.lights[i] = ma.remainingJoltage[i] % 2;
         }
-        /*if(ma.index != 48 && ma.index!= 23){ // these two machines dont find a solution with the method incl below, i cant figure out why
-            while(true){
-                for (int i = 0; i < ma.lights.length; i++) {
-                    ma.lights[i] = ma.remainingJoltage[i] % 2;
-                }
-                if(arraySum(ma.lights) == 0){
-                    // if everything is 0, then no button presses satisfy the next round
-                    // no button presses this round, but one more row will make it so that everything below is calculated 2x more times
-                    // need to do this manually otherwise countless combinations of any zero button presses will cause too many branches
-                    int[] storage = new int[ma.buttons.size()];
-                    ma.storedButtonPresses.add(storage);
-                    for (int i = 0; i < ma.remainingJoltage.length; i++) {
-                        ma.remainingJoltage[i] = ma.remainingJoltage[i] / 2;
-                    }
-                } else {
-                    break;
-                }
-            }
-        }*/
     }
 
-    public int getBestFromSolvedList(int q){
+    private int getBestFromSolvedList(int q){
         int minPresses = Integer.MAX_VALUE;
         for (int i = 0; i < fullSolved.size(); i++) {
             int currentPresses = 0;
@@ -376,96 +340,9 @@ public class Day10 {
         return minPresses;
     }
 
-
-    public void part2OLD(){
-        clearData();
-        for (int i = 0; i < 1; i++) {
-            Machine currentM = machines.get(i);
-            tempSolution = new int[machines.get(i).buttons.size()];
-            tempSolutionSum = Integer.MAX_VALUE;
-
-            generateCombinations3(currentM, 0);
-            finalSolution += tempSolutionSum;
-            System.out.println(tempSolutionSum);
-            if(tempSolutionSum == Integer.MAX_VALUE){
-                System.out.println("not solved: " + i);
-            }
-        }
-    }
-
-    public void generateCombinations3(Machine m, int nthButtonPressed){
-        if (nthButtonPressed == m.buttons.size() * 5) {
-            return;
-        }
-        int index = nthButtonPressed % m.buttons.size();
-
-        generateCombinations3(m, nthButtonPressed + 1);
-
-        pressButton3(m, index);
-        if (isOvershot3(m)) {
-            unPressButton3(m, index);
-            return;
-        }
-
-        checkIfSolution3(m);
-        generateCombinations3(m, nthButtonPressed + 1);
-
-        unPressButton3(m, index);
-    }
-
-    public void pressButton3(Machine m, int index){
-        Button button = m.buttons.get(index);
-        button.pressed ++;
-        for (int i = 0; i < button.numbers.length; i++) {
-            int light = button.numbers[i];
-            m.currentLights[light] ++;
-        }
-    }
-
-    public void unPressButton3(Machine m, int index){
-        Button button = m.buttons.get(index);
-        button.pressed--;
-        for (int i = 0; i < button.numbers.length; i++) {
-            int light = button.numbers[i];
-            m.currentLights[light] --;
-        }
-    }
-
-    public boolean isOvershot3(Machine m) {
-        for (int i = 0; i < m.currentLights.length; i++) {
-            if (m.currentLights[i] > m.joltage[i]) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public void checkIfSolution3(Machine m){
-        int size = m.currentLights.length;
-        int points = 0;
-        for (int i = 0; i < size; i++) {
-            if(m.currentLights[i] == m.joltage[i]){
-                points ++;
-            }
-        }
-        if(points == m.lights.length){
-            int currentSum = 0;
-            for (int i = 0; i < m.buttons.size(); i++) {
-                currentSum += m.buttons.get(i).pressed;
-            }
-            if(currentSum < tempSolutionSum){
-                tempSolutionSum = currentSum;
-                for (int i = 0; i < m.buttons.size(); i++) {
-                    tempSolution[i] = m.buttons.get(i).pressed;
-                }
-            }
-        }
-    }
-
     public void clearData(){
         tempSolutionSum = Integer.MAX_VALUE;
         finalSolution = 0;
-        //lightSize = 0;
         machines.clear();
         readData();
         processFile();
@@ -473,69 +350,9 @@ public class Day10 {
 
     public int arraySum(int[] a){
         int sum = 0;
-        for (int i = 0; i < a.length; i++) {
-            sum += a[i];
+        for (int j : a) {
+            sum += j;
         }
         return sum;
-    }
-
-    public boolean checkIfAllZero(Machine m){
-        for (int i = 0; i < m.lights.length; i++) {
-            if(m.lights[i] != 0){
-                return false;
-            }
-        }
-        // new instance:
-        Machine copied = new Machine();
-
-        copied.storedButtonPresses = new ArrayList<>();
-        for (int[] arr : m.storedButtonPresses) {
-            copied.storedButtonPresses.add(arr.clone());
-        }
-
-        // store button presses
-        int[] thisStepPresses = new int[m.buttons.size()];
-        copied.storedButtonPresses.add(thisStepPresses);
-
-        // copy button statics
-        for (Button b : m.buttons) {
-            Button newB = new Button();
-            newB.pressed = 0; // reset, not copy, preserve copy in arraylist
-            newB.numbers = b.numbers.clone();
-            copied.buttons.add(newB);
-        }
-        copied.joltage = m.joltage.clone();
-
-        copied.currentLights = new int[m.currentLights.length]; // reset not copy
-
-        // // CHECK IF SOLVED:
-        // remaining joltage:
-        copied.remainingJoltage = m.remainingJoltage.clone();;
-
-        // divide all
-        for (int i = 0; i < copied.remainingJoltage.length; i++) {
-            copied.remainingJoltage[i] = copied.remainingJoltage[i] / 2;
-        }
-
-        // check if solved
-        boolean fullSolution = true;
-        for (int i = 0; i < copied.remainingJoltage.length; i++) {
-            if(copied.remainingJoltage[i] != 0){
-                fullSolution = false;
-                break;
-            }
-        }
-
-        // exit everything if solved
-        if(fullSolution){
-            fullSolved.add(copied);
-            return true;
-        }
-
-        //calculateLights(copied);
-
-        solutionsQueue.add(copied);
-
-        return true;
     }
 }

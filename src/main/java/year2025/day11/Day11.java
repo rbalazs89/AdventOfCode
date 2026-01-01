@@ -5,29 +5,17 @@ import main.ReadLines;
 import java.util.*;
 
 public class Day11 {
-    List<String> fileLines;
-    ArrayList<Device> devices = new ArrayList<>();
-    int part1Result = 0;
-    int part2Result = 0;
-    int dacReached = 0;
-    int highestStepDec = 0;
+    private final ArrayList<Device> devices = new ArrayList<>();
+    private int part1Result = 0;
 
-    private final ReadLines reader = new ReadLines(2025, 10);
-    int inputNumber = 2; // use 1 for mock data, 2 for real data
-    private void readData(){
-        // READ INPUT
-        fileLines = reader.readFile(inputNumber);
-    }
+    private final ReadLines reader = new ReadLines(2025, 11, 2);
 
-    public void processData(){
+    private void processData(){
+        List<String> fileLines = reader.readFile();
         for (int i = 0; i < fileLines.size(); i++) {
             Device device = new Device();
             device.name = fileLines.get(i).substring(0,3);
             devices.add(device);
-        }
-
-        for (int i = 0; i < devices.size(); i++) {
-
         }
 
         for (int i = 0; i < fileLines.size(); i++) {
@@ -42,7 +30,7 @@ public class Day11 {
         }
     }
 
-    Device findDevice(String name){
+    private Device findDevice(String name){
         for (int i = 0; i < devices.size(); i++) {
             if(devices.get(i).name.equals(name)){
                 return devices.get(i);
@@ -55,13 +43,12 @@ public class Day11 {
     }
 
     public void part1(){
-        readData();
         processData();
         doOneStep(findDevice("you"), 0);
-        System.out.println("part1: " + part1Result);
+        System.out.println(part1Result);
     }
 
-    void doOneStep(Device d, int stepNumber){
+    private void doOneStep(Device d, int stepNumber){
         for (int i = 0; i < d.out.size(); i++) {
             if(d.out.get(i).name.equals("out")){
                 part1Result ++;
@@ -71,14 +58,8 @@ public class Day11 {
         }
     }
 
-    /**
-     * from out to dac backwards 12215 ways, always 8 steps
-     * from svr to fft 8049 8 or 9 step (?)
-     *
-     */
-
     public void part2(){
-        long scenario1 = 0;
+        long scenario1;
         long result1 = seeking("svr", "fft");
         resetGraph();
         long result2 = seeking("fft", "dac");
@@ -94,17 +75,17 @@ public class Day11 {
         resetGraph();
         result3 = seeking("fft", "out");
         long scenario2 = result1 * result2 * result3;
-        System.out.println("part 2 result: " + Math.max(scenario2, scenario1));
+        System.out.println(Math.max(scenario2, scenario1));
     }
 
-    public long seeking(String startName, String endName){
+    private long seeking(String startName, String endName){
         Device start = findDevice(startName);
         Device end = findDevice(endName);
 
         for (Device d : devices) {
             d.paths = 0L;
-            d.visited = 0;           // number of incoming edges seen from reachable predecessors
-            d.delay = 0;             // how many levels we have been waiting
+            d.visited = 0; // number of incoming edges seen from reachable predecessors
+            d.delay = 0; // how many levels we have been waiting
         }
 
         start.paths = 1L;
@@ -163,52 +144,7 @@ public class Day11 {
         return end.paths;
     }
 
-    public void doOneStep(Device d, boolean foundDac, boolean foundFft, int step){
-        for (int i = 0; i < d.out.size(); i++) {
-            Device next = d.out.get(i);
-            if(next.name.equals("out") && foundDac && foundFft){
-
-                System.out.println("result");
-            } else if(next.name.equals("dac")){
-                System.out.println("dacstep: " + step);
-                highestStepDec = Math.max(highestStepDec, step + 1);
-                dacReached ++ ;
-                //doOneStep2(next, true, foundFft, step + 1);
-            } else if(next.name.equals("fft")){
-                System.out.println("fft" + step);
-                part2Result ++;
-                //doOneStep(next, foundDac, true);
-            } else {
-                if(step <= 19){
-                    doOneStep(next, foundDac, foundFft, step + 1);
-                }
-            }
-        }
-    }
-
-    public void stepBackwards(Device d, boolean foundDac, boolean foundFft, int step){
-        for (int i = 0; i < d.in.size(); i++) {
-            Device next = d.in.get(i);
-            if(next.name.equals("you") && foundDac && foundFft){
-                part2Result ++;
-            } else if(next.name.equals("dac")){
-                System.out.println("dacstep: " + step);
-                //highestStepDec = Math.max(highestStepDec, step);
-                //dacReached ++ ;
-                stepBackwards(next, true, foundFft, step + 1);
-            } else if(next.name.equals("fft")){
-                //stoppls = true;
-                System.out.println("fftstep: " + step);
-                stepBackwards(next, foundDac, foundFft, step + 1);;
-            } else {
-                if(step < 25){
-                    stepBackwards(next, foundDac, foundFft, step + 1);
-                }
-            }
-        }
-    }
-
-    public void resetGraph(){
+    private void resetGraph(){
         for (int i = 0; i < devices.size(); i++) {
             devices.get(i).visited = 0;
             devices.get(i).paths = 0;

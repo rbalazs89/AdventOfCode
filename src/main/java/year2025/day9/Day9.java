@@ -7,18 +7,12 @@ import java.util.List;
 
 public class Day9 {
 
-    List<String> fileLines;
-    int inputFileIndex = 2;
-    int[][] points;
+    private int[][] points;
 
-    private final ReadLines reader = new ReadLines(2025, 9);
-    int inputNumber = 2; // use 1 for mock data, 2 for real data
-    private void readData(){
-        // READ INPUT
-        fileLines = reader.readFile(inputNumber);
-    }
+    private final ReadLines reader = new ReadLines(2025, 9, 2);
 
-    public void processData(){
+    private void processData(){
+        List<String> fileLines = reader.readFile();
         points = new int[2][fileLines.size()];
         for (int i = 0; i < fileLines.size(); i++) {
             String[] line = fileLines.get(i).split(",");
@@ -28,7 +22,6 @@ public class Day9 {
     }
 
     public void part1(){
-        readData();
         processData();
 
         long result = 0;
@@ -41,21 +34,18 @@ public class Day9 {
                 result = Math.max((x + 1L) * (y + 1L), result);
             }
         }
-        System.out.println("part 1: " + result);
+        System.out.println(result);
     }
-
+    /** idea for solution:
+     * the polygon seems suspiciously handcrafted and special in many ways, see attached png
+     * There are two big edges in the middle caused by two special corner points.
+     * Other than that the polygon is very similar to a circle.*
+     * From the picture it's obvious at first glance that one of the edges for the highest aread rectangle
+     * is one of those special corner points extending to the middle. The other one is somewhere on the other side of the rectangle.
+     * number 0 point starts at 3:00 and goes clockwise, so the 2 unique points are expected to be about i ~ 250;
+     */
     public void part2() {
-        /** idea for solution:
-         * the polygon seems suspiciously handcrafted and special in many ways, see attached png
-         * There are two big edges in the middle caused by two special corner points.
-         * Other than that the polygon is very similar to a circle.*
-         * From the picture its obvious at first glance that one of the edges for the highest aread rectangle
-         * is one of those special corner points extending to the middle. The other one is somewhere on the other side of the rectangle.
-         * number 0 point starts at 3:00 and goes clockwise, so the 2 unique points are expected to be about i ~ 250;
-         */
-        readData();
         processData();
-
         PolygonViewer.showWindow(points);
 
         // have some idea about min max coordinates:
@@ -75,30 +65,14 @@ public class Day9 {
             int vibeDistance = 10 * Math.max(Math.abs(points[0][0] - points[0][1]), Math.abs(points[1][0] - points[1][1]));
             int currentDistance = Math.max(Math.abs(points[0][i] - points[0][i + 1]), Math.abs(points[1][i] - points[1][i + 1]));
             if(vibeDistance <  currentDistance){
-                int[] firstUnique = {points[0][i + 1], points[1][i + 1]};
-                System.out.println("firstUnique: " + (i + 1)); // i = 248
-                System.out.println("secondUnique: " + (i + 2)); // i = 249
                 break;
             }
         }
 
-        /** Based on visual confirmation:
-         * scenario one:
-         * - corner point 1 is i = 248
-         * - corner point 2 is around i ~ 225
-         * scenario two:
-         * - corner point is i = 249
-         * - corner point 2 is around i ~ 275
-         */
-
-        // SCENARIO 1:
         int tolerance = 35;
         int unique1 = 248;
         int index1 = 225;
         int area = 0;
-
-        int maxI = -1;
-        int currentI;
 
         ArrayList<int[]> rectangle = new ArrayList<>();
         //SCENARIO 1:
@@ -112,7 +86,7 @@ public class Day9 {
             int[] topLeft = {points[0][i], points[1][unique1]};
             int[] bottomLeft = {points[0][i], points[1][i]};
             int[] bottomRight = {points[0][unique1], points[1][i]};
-            currentI = i;
+
             rectangle.add(topRight);
             rectangle.add(bottomRight);
             rectangle.add(bottomLeft);
@@ -120,7 +94,7 @@ public class Day9 {
 
             // check intersections:
             int x1, y1, x2, y2, a1, b1, a2, b2;
-            middleloop:
+            middleLoop:
             for (int j = 0; j < rectangle.size() - 1; j++) {
                 int index = j + 1;
                 if(j == rectangle.size() - 1){
@@ -139,7 +113,7 @@ public class Day9 {
 
                     if(doLinesIntersect(x1, y1, x2, y2, a1, b1, a2, b2)){
                         intersecting = true;
-                        break middleloop;
+                        break middleLoop;
                     }
                 }
             }
@@ -150,18 +124,15 @@ public class Day9 {
                 int currentArea = (side1 + 1) * (side2 + 1);
                 if (currentArea > area) {
                     area = currentArea;
-                    maxI = currentI;
                 }
             }
             rectangle.clear();
         }
         // constructing scenario 2 was not needed, good result was in scenario 1 (lower half of the polygon)
-
-        System.out.println("max I: " + maxI);
-        System.out.println("part2 result: " + area);
+        System.out.println(area);
     }
 
-    public boolean doLinesIntersect(int x1, int y1, int x2, int y2,
+    private boolean doLinesIntersect(int x1, int y1, int x2, int y2,
                                      int a1, int b1, int a2, int b2) {
 
         // normalize ranges
@@ -180,23 +151,17 @@ public class Day9 {
 
         // vertical vs horizontal
         if (pVert != qVert) {
+            boolean inside1;
+            boolean inside2;
             if (pVert) {
-                int ix = x1;
-                int iy = b1; // horizontals y
-
-                boolean inside1 = (minY1 < iy && iy < maxY1); // strict inside
-                boolean inside2 = (minX2 < ix && ix < maxX2); // strict inside
-
-                return inside1 && inside2;
+                // horizontals y
+                inside1 = (minY1 < b1 && b1 < maxY1);
+                inside2 = (minX2 < x1 && x1 < maxX2);
             } else {
-                int ix = a1;
-                int iy = y1;
-
-                boolean inside1 = (minX1 < ix && ix < maxX1);
-                boolean inside2 = (minY2 < iy && iy < maxY2);
-
-                return inside1 && inside2;
+                inside1 = (minX1 < a1 && a1 < maxX1);
+                inside2 = (minY2 < y1 && y1 < maxY2);
             }
+            return inside1 && inside2;
         }
 
         // same orientation (vertical/vertical or horizontal/horizontal)
@@ -204,16 +169,14 @@ public class Day9 {
             // must share X
             if (x1 != a1) return false;
 
-            // check STRICT Y-range overlap (no touching)
-            return (maxY1 > minY2) && (maxY2 > minY1) &&
-                    !(maxY1 == minY2) && !(maxY2 == minY1);
+            // check STRICT Y range overlap (no touching)
+            return maxY1 > minY2 && maxY2 > minY1;
         } else {
             // horizontal: must share Y
             if (y1 != b1) return false;
 
-            // check STRICT X-range overlap (no touching)
-            return (maxX1 > minX2) && (maxX2 > minX1) &&
-                    !(maxX1 == minX2) && !(maxX2 == minX1);
+            // check STRICT X range overlap (no touching)
+            return maxX1 > minX2 && maxX2 > minX1;
         }
     }
 }

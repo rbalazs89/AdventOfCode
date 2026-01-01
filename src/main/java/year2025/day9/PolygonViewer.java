@@ -5,7 +5,7 @@ import java.awt.*;
 
 class PolygonViewer extends JPanel {
 
-    int[][] points; // points[0][] = x, points[1][] = y
+    private final int[][] points; // points[0][] = x, points[1][] = y
 
     public PolygonViewer(int[][] points) {
         this.points = points;
@@ -18,7 +18,7 @@ class PolygonViewer extends JPanel {
         Graphics2D g2 = (Graphics2D) g;
         g2.setStroke(new BasicStroke(2f));
 
-        //find max coordinats for scaling
+        //find max coordinates for scaling
         int maxX = 0, maxY = 0;
         for (int i = 0; i < points[0].length; i++) {
             maxX = Math.max(maxX, points[0][i]);
@@ -41,22 +41,6 @@ class PolygonViewer extends JPanel {
         g2.fillPolygon(poly);
         g2.setColor(Color.BLUE);
         g2.drawPolygon(poly);
-
-        /*int maxI = 244;
-        int x1 = (int)(points[0][248] * scale);
-        int y1 = (int)(points[1][248] * scale);
-        int x2 = (int)(points[0][maxI] * scale);
-        int y2 = y1;
-        int x3 = (int)(points[0][maxI] * scale);
-        int y3 = (int)(points[1][maxI] * scale);
-        int x4 = x1;
-        int y4 = y3;
-        int width = x2 - x1;
-        int height = y3 - y1;
-
-        g2.setStroke(new BasicStroke(25));
-        g2.setColor(Color.BLACK);
-        g2.drawRect(x2, y2, width, height);*/
 
         /// ///////////
         // drawrect 1
@@ -93,14 +77,6 @@ class PolygonViewer extends JPanel {
         // drawrect 2
         /// //////////
         int maxI2 = 278;
-
-        realx1 = (points[0][249]);
-        realy1 = (points[1][249]);
-        realx3 = (points[0][maxI2]);
-        realy3 = (points[1][maxI2]);
-
-        realArea = (Math.abs(realx1 - realx3) + 1) * (Math.abs(realy1 - realy3) + 1);
-        //System.out.println("drawing: " + realArea);
 
         x1 = (int)(points[0][249] * scale);
         y1 = (int)(points[1][249] * scale);

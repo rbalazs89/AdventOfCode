@@ -7,36 +7,30 @@ import java.util.List;
 import java.util.Set;
 
 public class Day7 {
-    // part 2 2012790981 too low
+    private final ReadLines reader = new ReadLines(2025, 7, 2);
+    private List<String> fileLines;
+    private char[][] grid;
+    private int maxX = 0;
+    private int maxY = 0;
+    private final int[] start = new int[2];
+    private final Set<String> savedPositions = new HashSet<>();
+    private GridElement[][] grid2;
 
-    List<String> fileLines;
-    char[][] grid;
-    int maxX = 0;
-    int maxY = 0;
-    int[] start = new int[2];
-    Set<String> savedPositions = new HashSet<>();
-    GridElement[][] grid2;
-
-    private final ReadLines reader = new ReadLines(2025, 7);
-    int inputNumber = 2; // use 1 for mock data, 2 for real data
     private void readData(){
         // READ INPUT
-        fileLines = reader.readFile(inputNumber);
+        fileLines = reader.readFile();
     }
 
     public void part1(){
         makeStartingGrid();
         makeFirstStep();
-        drawGrid();
         makeBeam();
-        drawGrid();
-        System.out.println("part 1 result: " + savedPositions.size());
+        System.out.println(savedPositions.size());
     }
 
     public void part2(){
         makeGridPart2();
         makeBeamPart2();
-        //drawGrid2();
 
         long result = 0;
         for (int i = 0; i < maxX; i++) {
@@ -141,6 +135,10 @@ public class Day7 {
         }
     }
 
+    /**
+     * DEBUG METHOD
+     * shows the grid with beams
+     */
     public void drawGrid(){
         for (int i = 0; i < maxY; i++) {
             for (int j = 0; j < maxX; j++) {
@@ -151,6 +149,10 @@ public class Day7 {
         System.out.println();
     }
 
+    /**
+     * DEBUG METHOD
+     * shows the grid with beams
+     */
     public void drawGrid2(){
         for (int i = 0; i < maxY; i++) {
             for (int j = 0; j < maxX; j++) {

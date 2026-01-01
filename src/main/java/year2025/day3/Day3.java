@@ -7,7 +7,7 @@ import java.util.List;
 public class Day3 {
 
     private List<String> fileLines;
-    private final ReadLines reader = new ReadLines(2025, 3, 2);
+    private final ReadLines reader = new ReadLines(2025, 3, 1);
     private void readData(){
         fileLines = reader.readFile();
     }
@@ -37,16 +37,14 @@ public class Day3 {
         readData();
         long sum = 0;
         for (int i = 0; i < fileLines.size(); i++) {
-            String s = "";
+            StringBuilder s = new StringBuilder();
             int joltDigits = 11; //incl 0
             int oneLineMaxDigits = fileLines.getFirst().length();
             int currentMax;
             int adjustValue = 0;
 
             while(joltDigits >= 0){
-
                 String currentString = fileLines.get(i).substring(11 - joltDigits + adjustValue,oneLineMaxDigits - joltDigits);
-                System.out.println("currentString: " + currentString);
                 currentMax = 0;
 
                 //get max digits from the available range
@@ -65,14 +63,11 @@ public class Day3 {
                     }
                 }
 
-                s = s + (currentMax);
-
+                s.append(currentMax);
                 joltDigits--;
-                System.out.println(s);
             }
-            sum = sum + Long.parseLong(s);
+            sum = sum + Long.parseLong(s.toString());
         }
-
         System.out.println(sum);
     }
 }

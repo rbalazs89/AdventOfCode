@@ -6,20 +6,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Day12 {
-    List<String> fileLines;
-    ArrayList<Configuration> configurations = new ArrayList<>();
-
-    private final ReadLines reader = new ReadLines(2025, 10);
-    int inputNumber = 2; // use 1 for mock data, 2 for real data
+    private List<String> fileLines;
+    private final ArrayList<Configuration> configurations = new ArrayList<>();
+    private final ReadLines reader = new ReadLines(2025, 12,2);
     private void readData(){
-        // READ INPUT
-        fileLines = reader.readFile(inputNumber);
+        fileLines = reader.readFile();
     }
 
-    public void processData(){
+    private void processData(){
         for (int i = 30; i < fileLines.size(); i++) {
             Configuration c = new Configuration();
-            String parts[] = fileLines.get(i).split(" ");
+            String[] parts = fileLines.get(i).split(" ");
 
             c.shapes = new int[parts.length - 1];
             for (int j = 0; j < parts.length - 1; j++) {
@@ -27,7 +24,7 @@ public class Day12 {
             }
             String firstPart = parts[0];
             firstPart = firstPart.substring(0, firstPart.length() - 1);
-            String sizes[] = firstPart.split("x");
+            String[] sizes = firstPart.split("x");
             c.x = Integer.parseInt(sizes[0]);
             c.y = Integer.parseInt(sizes[1]);
             configurations.add(c);

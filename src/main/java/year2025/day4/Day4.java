@@ -7,7 +7,7 @@ import java.util.List;
 public class Day4 {
     private int[][] grid; // 0 -> empty, 1 -> filled
     private int maxX;
-    int maxY;
+    private int maxY;
 
     private final ReadLines reader = new ReadLines(2025, 4, 2);
 
@@ -154,5 +154,4 @@ public class Day4 {
 
         System.out.println(result - numberOfZero);
     }
-
 }

@@ -5,13 +5,11 @@ import main.ReadLines;
 import java.util.List;
 
 public class Day6 {
-    List<String> fileLines;
+    private List<String> fileLines;
 
-    private final ReadLines reader = new ReadLines(2025, 6);
-    int inputNumber = 2; // use 1 for mock data, 2 for real data
+    private final ReadLines reader = new ReadLines(2025, 6, 2);
     private void readData(){
-        // READ INPUT
-        fileLines = reader.readFile(inputNumber);
+        fileLines = reader.readFile();
     }
 
     public void part1(){
@@ -55,7 +53,6 @@ public class Day6 {
             part1 = part1 + l;
         }
         System.out.println(part1);
-
     }
 
     public void part2(){
@@ -141,11 +138,9 @@ public class Day6 {
                     batchResult = batchResult + numbers[i];
                 }
             }
-
             part2result = part2result + batchResult;
             counter = counter + thisManyNumbersInThisBatch + 1;
         }
-
         System.out.println(part2result);
     }
 }

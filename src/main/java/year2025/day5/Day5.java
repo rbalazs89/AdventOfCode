@@ -4,17 +4,14 @@ import main.ReadLines;
 import java.util.*;
 
 public class Day5 {
+    private final ReadLines reader = new ReadLines(2025, 5, 2);
 
-    private List<String> fileLines;
     private long[][] ranges;
     private long[] numbers;
 
-    private final ReadLines reader = new ReadLines(2025, 5, 2);
-    private void readData(){
-        fileLines = reader.readFile();
-    }
-
     private void processData(){
+        List<String> fileLines = reader.readFile();
+
         int rangesSize = 0;
         int numbersSize = 0;
         for (int i = 0; i < fileLines.size(); i++) {
@@ -46,7 +43,6 @@ public class Day5 {
     }
 
     public void part1(){
-        readData();
         processData();
 
         int result = 0;
@@ -59,15 +55,13 @@ public class Day5 {
                 }
             }
         }
-        System.out.println("part 1 result: " + result);
+        System.out.println(result);
     }
 
     public void part2() {
-        readData();
         processData();
 
         Arrays.sort(ranges, Comparator.comparingLong(a -> a[0]));
-
         List<long[]> merged = new ArrayList<>();
 
         for (long[] range : ranges) {
@@ -89,11 +83,10 @@ public class Day5 {
         }
 
         long result = 0;
-        //merged.sort(Comparator.comparingLong(a -> a[0]));
         for (int i = 0; i < merged.size(); i++) {
             result = result + merged.get(i)[1] - merged.get(i)[0] + 1;
         }
 
-        System.out.println("part 2 result: " + result);
+        System.out.println(result);
     }
 }

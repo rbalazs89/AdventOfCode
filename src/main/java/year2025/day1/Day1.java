@@ -51,7 +51,7 @@ public class Day1 {
                 counter++;
             }
         }
-        System.out.println("part 1: " + counter);
+        System.out.println(counter);
     }
 
     public void part2(){
@@ -101,6 +101,6 @@ public class Day1 {
             }
             counter = counter + over100.get(i);
         }
-        System.out.println("part 2: "+ counter);
+        System.out.println(counter);
     }
 }

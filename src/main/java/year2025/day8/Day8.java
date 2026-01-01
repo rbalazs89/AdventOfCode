@@ -5,25 +5,15 @@ import main.ReadLines;
 import java.util.*;
 
 public class Day8 {
-
-    List<String> fileLines;
-    int boxesToConnect = 1000; // 10 for sample input, 1000 for real input
-    long part2X1 = 0;
+    private final ReadLines reader = new ReadLines(2025, 8, 2) ;
+    private final int boxesToConnect = 1000; // 10 for sample input, 1000 for real input
+    private long part2X1 = 0;
     long part2X2 = 0;
-
-    Box[] boxes;
-    ArrayList<HashSet<Integer>> circuits = new ArrayList<>();
-
-    private final ReadLines reader = new ReadLines(2025, 8);
-    int inputNumber = 2; // use 1 for mock data, 2 for real data
-    private void readData(){
-        // READ INPUT
-        fileLines = reader.readFile(inputNumber);
-    }
-
+    private Box[] boxes;
+    private ArrayList<HashSet<Integer>> circuits = new ArrayList<>();
 
     public void processInput(){
-        readData();
+        List<String> fileLines = reader.readFile();
         boxes = new Box[fileLines.size()];
         for (int i = 0; i < fileLines.size(); i++) {
             Box box = new Box();
@@ -35,7 +25,7 @@ public class Day8 {
         }
     }
 
-    boolean connectBox(long[] d){
+    void connectBox(long[] d){
         part2X1 = boxes[(int)d[0]].x;
         part2X2 = boxes[(int)d[1]].x;
         for (int i = 0; i < circuits.size(); i++) {
@@ -48,19 +38,17 @@ public class Day8 {
                         if(circuits.get(j).contains((int)d[1])){
                           HashSet<Integer> MergeThis = circuits.get(j);
                             HashSet<Integer> mergeInto = circuits.get(i);
-                            for (Integer element : MergeThis) {
-                                mergeInto.add(element);
-                            }
+                            mergeInto.addAll(MergeThis);
                             circuits.remove(j);
 
-                            return true;
+                            return;
                         }
                     }
                     // not part of same circuit -> just add to circuit
                     circuits.get(i).add((int)(d[1]));
-                    return true;
+                    return;
                 } else {
-                    return true;
+                    return;
                     // boxes are already in the same circuit, just skip
                 }
             }
@@ -69,7 +57,7 @@ public class Day8 {
         for (int i = 0; i < circuits.size(); i++) {
             if(circuits.get(i).contains((int)d[1])){
                 circuits.get(i).add((int)d[0]);
-                return true;
+                return;
             }
         }
 
@@ -78,17 +66,11 @@ public class Day8 {
         set.add((int)d[0]);
         set.add((int)d[1]);
         circuits.add(set);
-        return true;
     }
 
     public void part1(){
         processInput();
-        PriorityQueue<long[]> distances = new PriorityQueue<>(new Comparator<long[]>() {
-            @Override
-            public int compare(long[] a, long[] b) {
-                return Long.compare(a[2], b[2]);  // sort by the 3rd element
-            }
-        });
+        PriorityQueue<long[]> distances = new PriorityQueue<>(Comparator.comparingLong(a -> a[2]));
 
         // get distances in boxes collection
         for (int i = 0; i < boxes.length; i++) {
@@ -127,12 +109,23 @@ public class Day8 {
         circuits.clear();
         circuits = new ArrayList<>();
         processInput();
-        PriorityQueue<long[]> distances = new PriorityQueue<>(new Comparator<long[]>() {
-            @Override
-            public int compare(long[] a, long[] b) {
-                return Long.compare(a[2], b[2]);  // sort by the 3rd element
-            }
-        });
+        PriorityQueue<long[]> distances = getLongs();
+
+        // go until required connections made
+        int counter = 0;
+        while(counter < boxesToConnect){
+            connectBox(distances.poll());
+            counter++;
+        }
+
+        while(circuits.getFirst().size() < 1000){
+            connectBox(distances.poll());
+        }
+        getResults2();
+    }
+
+    private PriorityQueue<long[]> getLongs() {
+        PriorityQueue<long[]> distances = new PriorityQueue<>(Comparator.comparingLong(a -> a[2]));
 
         // get distances in boxes collection
         for (int i = 0; i < boxes.length; i++) {
@@ -144,18 +137,7 @@ public class Day8 {
                 distances.add(d);
             }
         }
-
-        // go until required connections made
-        int counter = 0;
-        while(counter < boxesToConnect){
-            connectBox(distances.poll());
-            counter++;
-        }
-
-        while(circuits.get(0).size() < 1000){
-            connectBox(distances.poll());
-        }
-        getResults2();
+        return distances;
     }
 
     public void getResults2() {
