@@ -82,7 +82,6 @@ public class Day1 {
                     }
                 }
             }
-
             numbers.add(lineSolutions.getFirst());
             numbers.add(lineSolutions.getLast());
             lineSolutions.clear();
