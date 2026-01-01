@@ -2,10 +2,16 @@ package year2024.day13;
 
 import main.ReadLines;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Day13 {
+    private static final ArrayList<ClawSetup> setups = new ArrayList<>();
     private final ReadLines reader = new ReadLines(2024, 13, 2);
 
     private void prepare(){
+        setups.clear();
+        List<String> input = reader.readFile();
         for (int i = 0; i < input.size(); i += 4) {
             if (i + 2 >= input.size()) {
                 System.err.println("Error" + i);
@@ -28,12 +34,45 @@ public class Day13 {
     }
 
     public void part1(){
+        prepare();
+        for (int a = 0; a < setups.size(); a++) {
+            ClawSetup current = setups.get(a);
+            long maxMultA = Math.max(current.goalX / current.AX + 1,  current.goalY / current.AY + 1);
+            long maxMultB = Math.max(current.goalX / current.BX + 1,  current.goalY / current.BY + 1);
+            ArrayList<long[]> possibleCombinations = new ArrayList<>();
+            for (int i = 0; i < maxMultA; i++) {
+                for (int j = 0; j < maxMultB; j++) {
+                    if( i * current.AX + j * current.BX == current.goalX &&
+                            i * current.AY + j * current.BY == current.goalY){
+                        possibleCombinations.add(new long[]{i,j});
+                    }
+                }
+            }
+            if(possibleCombinations.isEmpty()){
+                current.value = 0;
+                continue;
+            }
 
+            // get the lowest value: A cost 3 tokens, B cost 1 tokens
+            long minValue = Integer.MAX_VALUE;
+            for (int i = 0; i < possibleCombinations.size(); i++) {
+                if(possibleCombinations.get(i)[0] * 3 +  possibleCombinations.get(i)[1] < minValue){
+                    minValue = possibleCombinations.get(i)[0] * 3L +  possibleCombinations.get(i)[1];
+                }
+            }
+            current.value = minValue;
+        }
+
+        long result = 0;
+        for (int i = 0; i < setups.size(); i++) {
+            result += setups.get(i).value;
+        }
+        System.out.println(result);
     }
 
     public void part2(){
         long result = 0;
-        // code:
+
         for (int i = 0; i < setups.size(); i++) {
 
             ClawSetup current = setups.get(i);
@@ -65,7 +104,6 @@ public class Day13 {
     }
 
     private static int parseCoordinate(String line, String coordinate) throws Exception {
-        //String pattern = coordinate + "([+=])(-?\\d+)";
         String[] parts = line.split(",");
         for (String part : parts) {
             if (part.contains(coordinate + "+") || part.contains(coordinate + "=")) {
@@ -75,7 +113,7 @@ public class Day13 {
         throw new Exception("Missing coordinate");
     }
 
-    private class ClawSetup {
+    private static class ClawSetup {
         private long AX;
         private long AY;
         private long BX;
