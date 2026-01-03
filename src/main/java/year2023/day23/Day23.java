@@ -19,6 +19,7 @@ public class Day23 {
     private final List<Intersection> graph = new ArrayList<>(); // represents graphs from the maze
 
     private void prepare(){
+        graph.clear();
         List<String> input = reader.readFile();
 
         // set up maze:
@@ -108,7 +109,76 @@ public class Day23 {
     }
 
     public void part2(){
+        prepare();
+        maze[startY][startX] = WALL;
+        setupGraphEdgeValues();
+        setupIncomingRoads();
+        setupLowestDepth();
+        //investigation();
 
+        System.out.println(graph.size());
+        for (int i = 0; i < graph.size(); i++) {
+            if(graph.get(i).roadsOut.size() - graph.get(i).roadsIn.size() == 0){
+                System.out.println(i + " : found.");
+            }
+        }
+    }
+
+    private void investigation(){
+        for (int i = 0; i < graph.size(); i++) {
+            Intersection currentIntersection = graph.get(i);
+            if(currentIntersection.roadsOut.size() == 2){
+                if(currentIntersection.roadsOut.get(0).to.roadsOut.size() == 1 &&
+                        currentIntersection.roadsOut.get(1).to.roadsOut.size() == 1){
+                    System.out.println("hello");
+                    if(currentIntersection.roadsOut.get(0).to.roadsOut.get(0) == currentIntersection.roadsOut.get(1).to.roadsOut.get(0)){
+                        System.out.println("found");
+                    }
+                }
+            }
+        }
+        System.out.println("investigation finished");
+    }
+
+    private void setupLowestDepth(){
+        Intersection start = graph.getFirst();
+        start.depth = 0;
+
+        Queue<Intersection> q = new LinkedList<>();
+        q.add(start);
+
+        int depth = 0;
+        while (!q.isEmpty()){
+            int size = q.size();
+            for (int i = 0; i < size; i++) {
+                Intersection currentIntersection = q.poll();
+                assert currentIntersection != null;
+                currentIntersection.depth = depth;
+                for (int j = 0; j < currentIntersection.roadsOut.size(); j++) {
+                    q.add(currentIntersection.roadsOut.get(j).to);
+                }
+            }
+            depth ++;
+        }
+    }
+
+    private void setupIncomingRoads(){
+        List<Road> allRoads = new ArrayList<>();
+
+        for (int i = 0; i < graph.size(); i++) {
+            Intersection currentIntersection = graph.get(i);
+            allRoads.addAll(currentIntersection.roadsOut);
+        }
+
+        for (int i = 0; i < allRoads.size(); i++) {
+            Road currentRoad = allRoads.get(i);
+            for (int j = 0; j < graph.size(); j++) {
+                Intersection currentIntersection = graph.get(j);
+                if(currentRoad.to == currentIntersection){
+                    currentIntersection.roadsIn.add(currentRoad);
+                }
+            }
+        }
     }
 
     private void findRoutesFromIntersection(Intersection thisRouteStart){
@@ -123,6 +193,7 @@ public class Day23 {
             int movesOnThisLevel = q.size();
             for (int i = 0; i < movesOnThisLevel; i++) {
                 int[] c = q.poll();
+                assert c != null;
 
                 int cy = c[0];
                 int cx = c[1];
@@ -136,18 +207,7 @@ public class Day23 {
                     if(maze[cy][cx + 1] != WALL) open ++;
                 }
 
-                if(cy == endY && cx == endX){
-                    Intersection end = findIntersection(cy, cx);
-                    Road road = new Road();
-                    road.value = depth;
-                    road.from = thisRouteStart;
-                    road.to = end;
-
-                    thisRouteStart.roadsOut.add(road);
-                    continue;
-                }
-
-                if(open >= 3 && depth != 0){
+                if((open >= 3 && depth != 0) || (cy == endY && cx == endX)){
                     Intersection end = findIntersection(cy, cx);
                     Road road = new Road();
                     road.value = depth;
@@ -209,7 +269,6 @@ public class Day23 {
         }
         System.out.println();
     }
-
     private Intersection findIntersection(int y, int x){
         for (int i = 0; i < graph.size(); i++) {
             Intersection c = graph.get(i);
@@ -221,11 +280,10 @@ public class Day23 {
         drawMaze();
         throw new IllegalStateException("no intersection found at the called location");
     }
-
     private void seeGraph(){
         for (int i = 0; i < graph.size(); i++) {
             Intersection node = graph.get(i);
-            System.out.println("this node y,x: " + node.y + "," + node.x + ".");
+            System.out.println(i + "this node y,x: " + node.y + "," + node.x + ".");
             for (int j = 0; j < node.roadsOut.size(); j++) {
                 Road r = node.roadsOut.get(j);
                 System.out.println(" - road " + j + ": " + r.value + " , " + r.to.y + "," + r.to.x);
