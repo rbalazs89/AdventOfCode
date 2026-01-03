@@ -2,8 +2,8 @@ package main;
 
 public class Main {
 
-    private static final int YEAR = 2024;
-    private static final int DAY = 16;
+    private static final int YEAR = 2023;
+    private static final int DAY = 25;
 
     public static void main(String[] args) throws Exception {
         String className = String.format("year%d.day%d.Day%d", YEAR, DAY, DAY);
