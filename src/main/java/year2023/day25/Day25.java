@@ -101,7 +101,6 @@ public class Day25 {
             Component c = q.poll();
             for (int i = 0; i < c.wires.size(); i++) {
                 Component other = c.getConnectedFromWire(c.wires.get(i));
-                Wire w = c.wires.get(i);
                 if(visited.add(other.name)){
                     q.add(other);
                 }
@@ -113,7 +112,6 @@ public class Day25 {
     public void part2(){
         // no part 2, nothing to do here
     }
-
 
     private void addToNetwork(String name){
         if(!network.containsKey(name)){
