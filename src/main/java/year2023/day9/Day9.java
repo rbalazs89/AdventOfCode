@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 
 public class Day9 {
     private final ReadLines reader = new ReadLines(2023, 9, 2);
-    private List<List<Integer>> numbers = new ArrayList<>();
+    private final List<List<Integer>> numbers = new ArrayList<>();
 
     private void prepare(){
         numbers.clear();
