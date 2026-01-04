@@ -6,5 +6,4 @@ import java.util.Set;
 class Path {
     Intersection latestIntersection;
     int currentSteps;
-    Set<String> visited = new HashSet<>();
 }
