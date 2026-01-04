@@ -6,9 +6,9 @@ import java.util.List;
 
 public class Day4 {
     private final ReadLines reader = new ReadLines(2024, 4, 2);
-    private static String[][] input;
-    private static int maxX;
-    private static int maxY;
+    private String[][] input;
+    private int maxX;
+    private int maxY;
 
     private void prepare(){
         List<String> lines = reader.readFile();
@@ -65,7 +65,7 @@ public class Day4 {
         System.out.println(result);
     }
 
-    private static boolean searchX(int x, int y){
+    private boolean searchX(int x, int y){
         if(!input[y][x].equals("A")){
             return false;
         }
@@ -94,7 +94,7 @@ public class Day4 {
 
         return false;
     }
-    private static boolean searchUp(int x, int y){
+    private boolean searchUp(int x, int y){
         if (y - 3 < 0) {
             return false;
         }
@@ -117,7 +117,7 @@ public class Day4 {
         return input[y][x].equals("S");
     }
 
-    private static boolean searchUpRight(int x, int y){
+    private boolean searchUpRight(int x, int y){
         if (y - 3 < 0 || x + 3 >= maxX) {
             return false;
         }
@@ -143,7 +143,7 @@ public class Day4 {
         return input[y][x].equals("S");
     }
 
-    private static boolean searchRight(int x, int y){
+    private boolean searchRight(int x, int y){
         if (x + 3 >= maxX) {
             return false;
         }
@@ -166,7 +166,7 @@ public class Day4 {
         return input[y][x].equals("S");
     }
 
-    private static boolean searchDownRight(int x, int y){
+    private boolean searchDownRight(int x, int y){
         if (x + 3 >= maxX || y + 3 >= maxY) {
             return false;
         }
@@ -192,7 +192,7 @@ public class Day4 {
         return input[y][x].equals("S");
     }
 
-    private static boolean searchDown(int x, int y){
+    private boolean searchDown(int x, int y){
         if (y + 3 >= maxY) {
             return false;
         }
@@ -215,7 +215,7 @@ public class Day4 {
         return input[y][x].equals("S");
     }
 
-    private static boolean searchDownLeft(int x, int y){
+    private boolean searchDownLeft(int x, int y){
         if (y + 3 >= maxY || x - 3 < 0) {
             return false;
         }
@@ -241,7 +241,7 @@ public class Day4 {
         return input[y][x].equals("S");
     }
 
-    private static boolean searchLeft(int x, int y){
+    private boolean searchLeft(int x, int y){
         if ( x - 3 < 0) {
             return false;
         }
@@ -264,7 +264,7 @@ public class Day4 {
         return input[y][x].equals("S");
     }
 
-    private static boolean searchUpLeft(int x, int y){
+    private boolean searchUpLeft(int x, int y){
         if (x - 3 < 0 || y - 3 < 0) {
             return false;
         }
