@@ -16,7 +16,7 @@ class Block {
         Block reversedBlock = new Block();
         ArrayList<String> reversedArray = new ArrayList<>();
 
-        for (int i = 0; i < this.content.get(0).length(); i++) {
+        for (int i = 0; i < this.content.getFirst().length(); i++) {
             reversedArray.add("");
         }
 
